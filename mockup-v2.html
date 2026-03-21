@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fido Financial — The AI Business Partner</title>
+  <title>Fido Financial — Design Concept v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -255,7 +255,7 @@
     }
 
     .hero-headline em {
-      font-style: normal;
+      font-style: italic;
       font-weight: 300;
       color: rgba(244,238,226,0.82);
     }
@@ -342,8 +342,8 @@
     .card-body { padding: 24px; }
 
     .card-greeting {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px; font-weight: 600;
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 15px; font-weight: 600;
       color: var(--cream); margin-bottom: 18px;
     }
 
@@ -399,8 +399,8 @@
     .stat-item { text-align: center; }
 
     .stat-value {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700; font-size: 40px;
+      font-family: 'Lora', serif;
+      font-style: italic; font-weight: 700; font-size: 40px;
       color: var(--gold); letter-spacing: -1px; line-height: 1;
     }
 
@@ -427,9 +427,10 @@
 
     .section-label::before { content: '■'; font-size: 7px; color: var(--gold); }
 
+    /* ── section headlines use Lora italic for warmth ── */
     .section-headline {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic; font-weight: 700;
       font-size: clamp(26px, 4vw, 48px);
       color: var(--ink); line-height: 1.14;
       letter-spacing: -0.5px; margin-bottom: 28px; max-width: 640px;
@@ -441,13 +442,12 @@
     }
 
     .pull-quote {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(17px, 2.4vw, 24px); font-weight: 300;
-      color: var(--ink); line-height: 1.65;
-      padding: 52px 0;
-      margin: 56px 0; max-width: 720px;
-      border-top: 1px solid var(--ink-rule);
-      border-bottom: 1px solid var(--ink-rule);
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: clamp(16px, 2.3vw, 22px); font-weight: 400;
+      color: var(--ink); line-height: 1.6;
+      padding: 44px 0 44px 40px;
+      border-left: 2px solid var(--gold);
+      margin: 56px 0; max-width: 680px;
     }
 
     /* ══════════════════════════════════
@@ -480,8 +480,8 @@
     }
 
     .problem-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px; font-weight: 600;
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 17px; font-weight: 600;
       color: var(--ink); margin-bottom: 14px;
     }
 
@@ -508,8 +508,8 @@
     }
 
     .product-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px; font-weight: 700;
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 20px; font-weight: 700;
       color: var(--ink); margin-bottom: 16px;
     }
 
@@ -543,8 +543,8 @@
     }
 
     .step-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px; font-weight: 600;
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 18px; font-weight: 600;
       color: var(--ink); margin-bottom: 12px;
     }
 
@@ -608,7 +608,7 @@
     .manifesto-line.visible { opacity: 1; transform: translateY(0); }
     .manifesto-line:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .manifesto-line strong { font-weight: 400; color: var(--cream); }
-    .manifesto-line em { font-family: 'Inter', sans-serif; font-style: normal; font-weight: 500; color: var(--cream); }
+    .manifesto-line em { font-family: 'Lora', serif; font-style: italic; color: var(--cream); }
 
     /* ══════════════════════════════════
        PARTNERS  — light parchment
@@ -631,8 +631,8 @@
     .partner-cell:hover .partner-icon-wrap { border-color: rgba(26,20,16,0.25); }
 
     .partner-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px; font-weight: 600;
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 16px; font-weight: 600;
       color: var(--ink); margin-bottom: 14px;
     }
 
@@ -669,8 +669,8 @@
     .cta-eyebrow::before { content: '■'; font-size: 7px; color: var(--gold); }
 
     .cta-headline {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic; font-weight: 700;
       font-size: clamp(28px, 4vw, 50px);
       letter-spacing: -1px; line-height: 1.1;
       color: var(--ink); margin-bottom: 40px;
@@ -785,104 +785,9 @@
     /* ══════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════ */
-    /* ── Hamburger button ── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 36px; height: 36px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      flex-shrink: 0;
-    }
-
-    .nav-hamburger span {
-      display: block;
-      width: 22px; height: 1.5px;
-      background: var(--cream);
-      border-radius: 2px;
-      transition: transform 0.25s ease, opacity 0.2s ease;
-      transform-origin: center;
-    }
-
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* ── Mobile dropdown menu ── */
-    .nav-mobile-menu {
-      display: none;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: rgba(12,9,6,0.97);
-      border-bottom: 1px solid var(--rule-dark);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 99;
-      padding: 0;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .nav-mobile-menu.open {
-      max-height: 400px;
-    }
-
-    .nav-mobile-menu ul {
-      list-style: none;
-      padding: 8px 0 4px;
-    }
-
-    .nav-mobile-menu ul li a {
-      display: block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(244,238,226,0.70);
-      text-decoration: none;
-      padding: 18px 24px;
-      border-bottom: 1px solid var(--rule-dark);
-      transition: color 0.2s, background 0.2s;
-    }
-
-    .nav-mobile-menu ul li a:hover {
-      color: var(--cream);
-      background: rgba(244,238,226,0.04);
-    }
-
-    .nav-mobile-menu .nav-mobile-cta {
-      display: block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--dark);
-      background: rgba(244,238,226,0.96);
-      text-decoration: none;
-      text-align: center;
-      padding: 18px 24px;
-      margin: 16px 24px 24px;
-      border-radius: 100px;
-      transition: opacity 0.2s;
-    }
-
-    .nav-mobile-menu .nav-mobile-cta:hover { opacity: 0.85; }
-
     @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 60px; }
+      nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-      .nav-mobile-menu { display: block; }
-      .nav-logo-name { font-size: 18px; }
-
       .hero { padding: 100px 24px 0; }
       .hero-card-wrap { max-width: 100%; }
       .stats-bar { gap: 28px; padding: 32px 24px; }
@@ -896,7 +801,6 @@
       .cta-inner { grid-template-columns: 1fr; gap: 44px; padding: 64px 24px 80px; }
       footer { padding: 40px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .footer-links { flex-wrap: wrap; gap: 16px; }
     }
   </style>
 </head>
@@ -915,20 +819,8 @@
     <li><a href="#vision">Vision</a></li>
   </ul>
   <a href="#waitlist" class="nav-cta">Get Early Access</a>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<div class="nav-mobile-menu" id="nav-mobile-menu">
-  <ul>
-    <li><a href="#product">Product</a></li>
-    <li><a href="#manifesto">Manifesto</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#vision">Vision</a></li>
-  </ul>
-  <a href="#waitlist" class="nav-mobile-cta">Get Early Access</a>
-</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1009,7 +901,7 @@
       <div class="problem-cell"><div class="problem-num">02</div><div class="problem-title">Staying Compliant</div><div class="problem-text">LLC filings, annual reports, registered agent requirements: a constant compliance burden most owners aren't equipped to navigate alone.</div></div>
       <div class="problem-cell"><div class="problem-num">03</div><div class="problem-title">Operating the Business</div><div class="problem-text">Getting customers, managing cash flow, paying vendors, handling invoices. Fido automates the work owners dislike most.</div></div>
     </div>
-    <div class="pull-quote">We are not building software that helps small businesses manage their problems. We are building an agent that eliminates them.</div>
+    <div class="pull-quote">"We are not building software that helps small businesses manage their problems. We are building an agent that eliminates them."</div>
   </section>
 
   <!-- PRODUCT -->
@@ -1076,7 +968,7 @@
     <div class="section-label">Vision</div>
     <h2 class="section-headline">Every great business deserves a trusted partner</h2>
     <p class="section-body">Every great business eventually has a trusted advisor: an accountant who knows the numbers inside out, a banker who picks up the phone, a lawyer who prevents problems before they happen. For most of history, that relationship has been available only to companies large enough to pay for it. Fido makes it available to everyone.</p>
-    <div class="pull-quote">We named it Fido because that's what it is. Always there. Always loyal. Never asks for credit. Just gets it done.</div>
+    <div class="pull-quote">"We named it Fido because that's what it is. Always there. Always loyal. Never asks for credit. Just gets it done."</div>
     <p class="section-body">The AI operating system of the American small business. The single trusted entity that knows more about how a business runs than the owner themselves, and works every day to make it better.</p>
   </section>
 
@@ -1148,21 +1040,6 @@ const mObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 mLines.forEach(l => mObs.observe(l));
-
-const hamburger = document.getElementById('nav-hamburger');
-const mobileMenu = document.getElementById('nav-mobile-menu');
-hamburger.addEventListener('click', () => {
-  const open = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', open);
-  hamburger.setAttribute('aria-expanded', open);
-});
-mobileMenu.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', false);
-  });
-});
 
 function handleCTA(e) {
   e.preventDefault();
