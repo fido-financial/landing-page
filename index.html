@@ -1219,7 +1219,7 @@
           <path d="M11.5 7.5a4.5 4.5 0 01-4.5 4.5A4.5 4.5 0 012.5 7.5 4.5 4.5 0 017 3a3.5 3.5 0 004.5 4.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
-      <a href="mailto:support@fidofinancial.com" class="nav-cta">Get Early Access</a>
+      <a href="#waitlist" class="nav-cta">Get Early Access</a>
     </div>
   </div>
 </nav>
@@ -1229,7 +1229,7 @@
   <a href="#manifesto" class="mobile-menu-link">Manifesto</a>
   <a href="#partners" class="mobile-menu-link">Partners</a>
   <a href="#vision" class="mobile-menu-link">Vision</a>
-  <a href="mailto:support@fidofinancial.com" class="mobile-menu-cta">Get Early Access</a>
+  <a href="#waitlist" class="mobile-menu-cta">Get Early Access</a>
 </div>
 
 
@@ -1243,12 +1243,14 @@
     <div class="hero-blob hero-blob-3"></div>
   </div>
   <div class="hero-inner">
-    <h1 class="hero-headline">Your AI<br>business partner.</h1>
+    <h1 class="hero-headline">
+      I'm the AI business partner that scales your output, not your overhead.
+    </h1>
     <p class="hero-sub">
-      Fido handles the hard parts of running a business so you can spend more time doing what you love, and less time on everything else.
+      Fido Financial handles the painful daily grind, so you can spend more time doing what you love, and less time on everything else. Stop Working For the Man (SWFTM™) with Fido Financial!
     </p>
     <div class="hero-ctas">
-      <a href="mailto:support@fidofinancial.com" class="btn-primary">Get Early Access</a>
+      <a href="#waitlist" class="btn-primary">Get Early Access</a>
       <a href="#manifesto" class="hero-link">Read the Manifesto →</a>
     </div>
   </div>
@@ -1526,7 +1528,9 @@
       <form class="cta-form" onsubmit="handleCTA(event)">
         <input class="cta-input" type="text" name="name" placeholder="Your name" required />
         <input class="cta-input" type="email" name="email" placeholder="your@email.com" required />
-        <input class="cta-input" type="text" name="business" placeholder="Your business (optional)" />
+        <input class="cta-input" type="text" name="business" placeholder="Your business name (optional)" />
+        <input class="cta-input" type="url" name="website" placeholder="Your business website (optional)" />
+        <input class="cta-input" type="tel" name="phone" placeholder="Your phone number (optional)" />
         <button class="cta-submit" type="submit">Request Early Access</button>
       </form>
       <div class="cta-note" id="cta-note">We're onboarding a limited first cohort. We'll reach out personally.</div>
@@ -1628,8 +1632,10 @@ function handleCTA(e) {
   const name = data.get('name') || '';
   const email = data.get('email') || '';
   const business = data.get('business') || '';
+  const website = data.get('website') || '';
+  const phone = data.get('phone') || '';
   const subject = encodeURIComponent('Early Access Request');
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nBusiness: ${business}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nBusiness: ${business}\nWebsite: ${website}\nPhone: ${phone}`);
   window.location.href = `mailto:support@fidofinancial.com?subject=${subject}&body=${body}`;
   const note = document.getElementById('cta-note');
   note.textContent = "You're on the list. We'll be in touch personally.";
