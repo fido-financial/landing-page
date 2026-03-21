@@ -21,10 +21,10 @@
       --parch-alt: #E4DDD0;
       --parch-hi:  #F2EBE0;
 
-      /* ── accent ── */
-      --gold:      #C4903A;
-      --gold-hi:   #D4A040;   /* brighter on dark */
-      --gold-lo:   rgba(196,144,58,0.13);
+      /* ── no accent — single text only ── */
+      --gold:      var(--ink);
+      --gold-hi:   var(--cream);
+      --gold-lo:   rgba(26,20,16,0.06);
 
       /* ── dark-section type ── */
       --cream:     #EAE0CC;
@@ -221,15 +221,15 @@
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(196,144,58,0.1);
-      border: 1px solid rgba(196,144,58,0.25);
+      background: rgba(234,224,204,0.07);
+      border: 1px solid rgba(234,224,204,0.18);
       border-radius: 100px;
       padding: 7px 18px;
       margin-bottom: 44px;
       font-family: 'IBM Plex Mono', monospace;
       font-size: 9px;
       letter-spacing: 0.2em;
-      color: var(--gold-hi);
+      color: rgba(234,224,204,0.5);
       opacity: 0;
       animation: fadeUp 0.6s ease 0.1s forwards;
     }
@@ -360,12 +360,12 @@
       cursor: pointer; transition: background 0.2s, border-color 0.2s;
     }
 
-    .chip:hover { background: var(--gold-lo); border-color: rgba(196,144,58,0.28); }
+    .chip:hover { background: rgba(234,224,204,0.08); border-color: rgba(234,224,204,0.22); }
 
     .chip-hi {
-      color: var(--gold-hi);
-      background: rgba(196,144,58,0.1);
-      border-color: rgba(196,144,58,0.28);
+      color: var(--cream);
+      background: rgba(234,224,204,0.1);
+      border-color: rgba(234,224,204,0.25);
     }
 
     .card-input-row {
@@ -383,7 +383,7 @@
     }
 
     .card-send {
-      width: 28px; height: 28px; background: var(--gold-hi);
+      width: 28px; height: 28px; background: var(--cream);
       border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
 
@@ -536,7 +536,7 @@
     }
 
     .step-row:last-child { border-bottom: 1px solid var(--ink-rule); }
-    .step-row:hover { background: rgba(196,144,58,0.04); }
+    .step-row:hover { background: rgba(26,20,16,0.03); }
 
     .step-num {
       font-family: 'IBM Plex Mono', monospace;
@@ -594,7 +594,7 @@
     .manifesto-expand {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--gold-hi); margin-bottom: 88px;
+      text-transform: uppercase; color: rgba(234,224,204,0.35); margin-bottom: 88px;
     }
 
     .manifesto-line {
@@ -609,7 +609,7 @@
     .manifesto-line.visible { opacity: 1; transform: translateY(0); }
     .manifesto-line:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .manifesto-line strong { font-weight: 400; color: var(--cream); }
-    .manifesto-line em { font-family: 'Lora', serif; font-style: italic; color: var(--gold-hi); }
+    .manifesto-line em { font-family: 'Lora', serif; font-style: italic; color: var(--cream); }
 
     /* ══════════════════════════════════
        PARTNERS  — light parchment
@@ -629,7 +629,7 @@
       margin-bottom: 28px; transition: border-color 0.2s;
     }
 
-    .partner-cell:hover .partner-icon-wrap { border-color: rgba(196,144,58,0.4); }
+    .partner-cell:hover .partner-icon-wrap { border-color: rgba(26,20,16,0.25); }
 
     .partner-title {
       font-family: 'Lora', serif;
