@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fido Financial — Design Concept v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      /* ── dark sections: hero, manifesto, footer ── */
+      --dark:      #0C0906;
+      --dark-2:    #131009;
+      --dark-3:    #1B1610;
+
+      /* ── light sections: content (v1 warmth) ── */
+      --parch:     #EDE5D8;
+      --parch-alt: #E4DDD0;
+      --parch-hi:  #F2EBE0;
+
+      /* ── accent ── */
+      --gold:      #C4903A;
+      --gold-hi:   #D4A040;   /* brighter on dark */
+      --gold-lo:   rgba(196,144,58,0.13);
+
+      /* ── dark-section type ── */
+      --cream:     #EAE0CC;
+      --cream-mid: rgba(234,224,204,0.55);
+      --cream-dim: rgba(234,224,204,0.28);
+
+      /* ── light-section type ── */
+      --ink:       #1A1410;
+      --ink-mid:   #5C4E40;
+      --ink-faint: #9A8B78;
+      --ink-rule:  #CABFAC;
+
+      /* ── rules ── */
+      --rule-dark: rgba(255,255,255,0.07);
+      --rule-lite: #CABFAC;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--parch);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════
+       NAV  — lives over the dark hero
+    ══════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 58px;
+      background: rgba(12,9,6,0.70);
+      border-bottom: 1px solid var(--rule-dark);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+    }
+
+    .nav-mark {
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none;
+    }
+
+    .nav-seal {
+      width: 32px; height: 32px;
+      border: 1.5px solid rgba(234,224,204,0.28);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .nav-mark:hover .nav-seal { border-color: var(--gold-hi); }
+
+    .nav-seal-f {
+      font-family: 'IBM Plex Mono', monospace;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .nav-wordmark {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: rgba(234,224,204,0.5);
+    }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: rgba(234,224,204,0.38);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--dark);
+      background: var(--cream);
+      text-decoration: none;
+      padding: 11px 24px;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ══════════════════════════════════
+       HERO — atmospheric dawn sky
+    ══════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 130px 52px 0;
+    }
+
+    /* Layered sky — lighter, hazy, warm dawn */
+    .hero-sky {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 110% 55% at 50% 100%, rgba(90,50,10,0.55)  0%, transparent 65%),
+        radial-gradient(ellipse  70% 38% at 50% 88%,  rgba(160,90,20,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse  55% 28% at 28% 72%,  rgba(40,70,110,0.22) 0%, transparent 50%),
+        radial-gradient(ellipse  50% 22% at 76% 68%,  rgba(30,60,100,0.18) 0%, transparent 45%),
+        /* warm haze at mid-horizon */
+        radial-gradient(ellipse 100% 30% at 50% 56%,  rgba(160,120,60,0.12) 0%, transparent 70%),
+        linear-gradient(
+          to bottom,
+          #111820 0%,
+          #182336 14%,
+          #233A55 28%,
+          #304E6A 42%,
+          #456070 54%,
+          #6A7060 64%,
+          #8A7248 74%,
+          #6A4E22 84%,
+          #3A2810 94%,
+          #1C1208 100%
+        );
+    }
+
+    /* fine horizontal banding — retro-illustration reference */
+    .hero-bands {
+      position: absolute; inset: 0; z-index: 1;
+      opacity: 0.1;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 5px,
+        rgba(200,160,80,0.2) 5px, rgba(200,160,80,0.2) 6px
+      );
+      background-size: 100% 48px;
+    }
+
+    /* warm horizon glow */
+    .hero-glow {
+      position: absolute;
+      bottom: 260px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(180,110,30,0.18) 0%, transparent 68%);
+      z-index: 2; pointer-events: none;
+    }
+
+    /* atmospheric haze — makes it feel less harsh */
+    .hero-haze {
+      position: absolute; inset: 0; z-index: 3;
+      background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(12,9,6,0.3) 100%);
+      pointer-events: none;
+    }
+
+    .hero-fade-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 140px;
+      background: linear-gradient(to bottom, var(--dark) 0%, transparent 100%);
+      z-index: 4;
+    }
+
+    .hero-fade-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 300px;
+      background: linear-gradient(to top, var(--parch) 0%, transparent 100%);
+      z-index: 4;
+    }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      max-width: 960px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,144,58,0.1);
+      border: 1px solid rgba(196,144,58,0.25);
+      border-radius: 100px;
+      padding: 7px 18px;
+      margin-bottom: 44px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--gold-hi);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold-hi); flex-shrink: 0;
+    }
+
+    /* ── BIG MONO HEADLINE — Ingram Mono vibe ── */
+    .hero-headline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(28px, 5vw, 62px);
+      letter-spacing: -0.01em;
+      line-height: 1.18;
+      color: var(--cream);
+      margin-bottom: 36px;
+      text-shadow: 0 2px 48px rgba(0,0,0,0.45);
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.22s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(234,224,204,0.6);
+    }
+
+    .hero-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(234,224,204,0.45);
+      line-height: 1.9;
+      max-width: 480px;
+      margin: 0 auto 52px;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.42s forwards;
+    }
+
+    .hero-ctas {
+      display: flex; align-items: center; gap: 28px; justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.54s forwards;
+    }
+
+    .btn-primary {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--dark);
+      background: var(--cream);
+      text-decoration: none;
+      padding: 17px 38px;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: rgba(234,224,204,0.38);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--cream); }
+
+    /* floating UI card */
+    .hero-card-wrap {
+      position: relative; z-index: 10;
+      margin-top: 72px;
+      width: 100%; max-width: 680px;
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
+    }
+
+    .hero-card {
+      background: rgba(22,16,9,0.82);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .card-topbar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 13px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF6058; } .dot-y { background: #FFBD2E; } .dot-g { background: #28C941; }
+
+    .card-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.1em;
+      color: rgba(234,224,204,0.25); margin-left: 6px;
+    }
+
+    .card-body { padding: 24px; }
+
+    .card-greeting {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 15px; font-weight: 600;
+      color: var(--cream); margin-bottom: 18px;
+    }
+
+    .card-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+    .chip {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.06em;
+      color: rgba(234,224,204,0.45);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px; padding: 7px 14px;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+
+    .chip:hover { background: var(--gold-lo); border-color: rgba(196,144,58,0.28); }
+
+    .chip-hi {
+      color: var(--gold-hi);
+      background: rgba(196,144,58,0.1);
+      border-color: rgba(196,144,58,0.28);
+    }
+
+    .card-input-row {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 9px; padding: 10px 14px;
+    }
+
+    .card-input-text {
+      flex: 1;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; font-weight: 300;
+      color: rgba(234,224,204,0.22); letter-spacing: 0;
+    }
+
+    .card-send {
+      width: 28px; height: 28px; background: var(--gold-hi);
+      border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════
+       STATS BAR  — warm parchment
+    ══════════════════════════════════ */
+    .stats-bar {
+      background: var(--parch-hi);
+      border-bottom: 1px solid var(--ink-rule);
+      padding: 44px 52px;
+      display: flex; justify-content: center; gap: 108px; flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-value {
+      font-family: 'Lora', serif;
+      font-style: italic; font-weight: 700; font-size: 40px;
+      color: var(--gold); letter-spacing: -1px; line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-faint); margin-top: 10px;
+    }
+
+    /* ══════════════════════════════════
+       PAGE / SECTION BASE  — light parchment
+    ══════════════════════════════════ */
+    .page { max-width: 1100px; margin: 0 auto; padding: 0 80px; }
+
+    .section { padding: 100px 0; border-top: 1px solid var(--ink-rule); }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ink-faint);
+      margin-bottom: 36px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .section-label::before { content: '■'; font-size: 7px; color: var(--gold); }
+
+    /* ── section headlines use Lora italic for warmth ── */
+    .section-headline {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic; font-weight: 700;
+      font-size: clamp(26px, 4vw, 48px);
+      color: var(--ink); line-height: 1.14;
+      letter-spacing: -0.5px; margin-bottom: 28px; max-width: 640px;
+    }
+
+    .section-body {
+      font-size: 15px; font-weight: 300; color: var(--ink-mid);
+      line-height: 1.9; max-width: 580px;
+    }
+
+    .pull-quote {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: clamp(16px, 2.3vw, 22px); font-weight: 400;
+      color: var(--ink); line-height: 1.6;
+      padding: 44px 0 44px 40px;
+      border-left: 2px solid var(--gold);
+      margin: 56px 0; max-width: 680px;
+    }
+
+    /* ══════════════════════════════════
+       PROBLEM  — light parchment
+    ══════════════════════════════════ */
+    .problem-grid {
+      margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--ink-rule);
+    }
+
+    .problem-cell {
+      background: var(--parch);
+      padding: 44px 36px; transition: background 0.25s;
+      position: relative; overflow: hidden;
+    }
+
+    .problem-cell::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 2px; height: 0; background: var(--gold);
+      transition: height 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .problem-cell:hover { background: var(--parch-hi); }
+    .problem-cell:hover::before { height: 100%; }
+
+    .problem-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-faint); margin-bottom: 22px;
+    }
+
+    .problem-title {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 17px; font-weight: 600;
+      color: var(--ink); margin-bottom: 14px;
+    }
+
+    .problem-text { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.85; }
+
+    /* ══════════════════════════════════
+       PRODUCT  — light parchment
+    ══════════════════════════════════ */
+    .product-grid {
+      margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--ink-rule);
+    }
+
+    .product-cell {
+      background: var(--parch); padding: 52px 44px; transition: background 0.25s;
+    }
+
+    .product-cell:hover { background: var(--parch-hi); }
+
+    .product-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 20px;
+    }
+
+    .product-title {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 20px; font-weight: 700;
+      color: var(--ink); margin-bottom: 16px;
+    }
+
+    .product-not {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink-faint); line-height: 1.7;
+      margin-bottom: 14px;
+      text-decoration: line-through;
+      text-decoration-color: rgba(156,139,120,0.4);
+    }
+
+    .product-is { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.85; }
+
+    /* ══════════════════════════════════
+       HOW IT WORKS  — light parchment
+    ══════════════════════════════════ */
+    .steps { margin-top: 56px; }
+
+    .step-row {
+      display: grid; grid-template-columns: 72px 1fr;
+      border-top: 1px solid var(--ink-rule);
+      padding: 44px 0; transition: background 0.15s;
+    }
+
+    .step-row:last-child { border-bottom: 1px solid var(--ink-rule); }
+    .step-row:hover { background: rgba(196,144,58,0.04); }
+
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em; color: var(--gold); padding-top: 4px;
+    }
+
+    .step-title {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 18px; font-weight: 600;
+      color: var(--ink); margin-bottom: 12px;
+    }
+
+    .step-text { font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.85; max-width: 560px; }
+
+    /* ══════════════════════════════════
+       MANIFESTO  — dark, atmospheric
+    ══════════════════════════════════ */
+    .manifesto-section {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      position: relative; overflow: hidden;
+    }
+
+    .manifesto-section::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 250px;
+      background: linear-gradient(to bottom, rgba(27,48,80,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .manifesto-inner {
+      max-width: 1100px; margin: 0 auto; padding: 112px 80px 128px; position: relative;
+    }
+
+    .manifesto-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(234,224,204,0.25);
+      margin-bottom: 52px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .manifesto-eyebrow::before { content: '■'; font-size: 7px; color: var(--gold-hi); }
+
+    /* ── Big mono display — Ingram Mono feel ── */
+    .manifesto-swftm {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(72px, 13vw, 138px);
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .manifesto-expand {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold-hi); margin-bottom: 88px;
+    }
+
+    .manifesto-line {
+      font-size: clamp(15px, 2.2vw, 20px);
+      font-weight: 300; color: var(--cream-mid);
+      line-height: 1.72; padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .manifesto-line.visible { opacity: 1; transform: translateY(0); }
+    .manifesto-line:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .manifesto-line strong { font-weight: 400; color: var(--cream); }
+    .manifesto-line em { font-family: 'Lora', serif; font-style: italic; color: var(--gold-hi); }
+
+    /* ══════════════════════════════════
+       PARTNERS  — light parchment
+    ══════════════════════════════════ */
+    .partners-grid {
+      margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--ink-rule);
+    }
+
+    .partner-cell { background: var(--parch); padding: 48px 36px; transition: background 0.25s; }
+    .partner-cell:hover { background: var(--parch-hi); }
+
+    .partner-icon-wrap {
+      width: 36px; height: 36px;
+      border: 1px solid var(--ink-rule); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 28px; transition: border-color 0.2s;
+    }
+
+    .partner-cell:hover .partner-icon-wrap { border-color: rgba(196,144,58,0.4); }
+
+    .partner-title {
+      font-family: 'Lora', serif;
+      font-style: italic; font-size: 16px; font-weight: 600;
+      color: var(--ink); margin-bottom: 14px;
+    }
+
+    .partner-text { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.85; }
+
+    .partner-cta {
+      display: inline-block; margin-top: 56px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em;
+      color: var(--parch); background: var(--ink);
+      text-decoration: none; padding: 16px 36px;
+      border-radius: 100px; transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .partner-cta:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    /* ══════════════════════════════════
+       CTA  — slightly deeper parch
+    ══════════════════════════════════ */
+    .cta-section { background: var(--parch-alt); border-top: 1px solid var(--ink-rule); }
+
+    .cta-inner {
+      max-width: 1100px; margin: 0 auto; padding: 112px 80px 128px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start;
+    }
+
+    .cta-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ink-faint); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .cta-eyebrow::before { content: '■'; font-size: 7px; color: var(--gold); }
+
+    .cta-headline {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic; font-weight: 700;
+      font-size: clamp(28px, 4vw, 50px);
+      letter-spacing: -1px; line-height: 1.1;
+      color: var(--ink); margin-bottom: 40px;
+    }
+
+    .cta-perks { list-style: none; }
+
+    .cta-perk {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink-mid); padding: 17px 0;
+      border-top: 1px solid var(--ink-rule);
+      display: flex; align-items: center; gap: 14px; letter-spacing: 0.03em;
+    }
+
+    .cta-perk:last-child { border-bottom: 1px solid var(--ink-rule); }
+    .cta-perk::before { content: '→'; color: var(--gold); font-size: 13px; flex-shrink: 0; }
+
+    .cta-form { display: flex; flex-direction: column; gap: 0; }
+
+    .cta-input {
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--ink-rule);
+      padding: 17px 0;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300;
+      color: var(--ink); outline: none; transition: border-color 0.2s; width: 100%;
+    }
+
+    .cta-input::placeholder {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+    }
+
+    .cta-input:focus { border-color: var(--gold); }
+
+    .cta-submit {
+      margin-top: 36px; width: 100%;
+      background: var(--ink); color: var(--parch); border: none;
+      border-radius: 100px; padding: 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .cta-submit:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    .cta-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+      letter-spacing: 0.06em; color: var(--ink-faint); margin-top: 16px; line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════
+       FOOTER  — dark
+    ══════════════════════════════════ */
+    footer {
+      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 52px 80px;
+    }
+
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 32px; flex-wrap: wrap;
+    }
+
+    .footer-logo { display: flex; align-items: center; gap: 11px; }
+
+    .footer-seal {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(234,224,204,0.15); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .footer-seal-f {
+      font-family: 'IBM Plex Mono', monospace; font-style: italic;
+      font-size: 14px; font-weight: 400; color: var(--cream);
+    }
+
+    .footer-name {
+      font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
+      letter-spacing: 0.12em; color: rgba(234,224,204,0.3);
+    }
+
+    .footer-links { display: flex; gap: 32px; list-style: none; }
+
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+      letter-spacing: 0.12em; color: rgba(234,224,204,0.22);
+      text-decoration: none; transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(234,224,204,0.65); }
+
+    .footer-legal {
+      font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+      letter-spacing: 0.08em; color: rgba(234,224,204,0.15);
+    }
+
+    /* ══════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 0; }
+      .hero-card-wrap { max-width: 100%; }
+      .stats-bar { gap: 28px; padding: 32px 24px; }
+      .stat-item { min-width: calc(50% - 14px); }
+      .page { padding: 0 24px; }
+      .section { padding: 60px 0; }
+      .problem-grid, .partners-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+      .manifesto-inner { padding: 64px 24px 80px; }
+      .manifesto-swftm { letter-spacing: -0.03em; }
+      .cta-inner { grid-template-columns: 1fr; gap: 44px; padding: 64px 24px 80px; }
+      footer { padding: 40px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-mark">
+    <div class="nav-seal"><span class="nav-seal-f">f</span></div>
+    <span class="nav-wordmark">Fido Financial</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#product">Product</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#vision">Vision</a></li>
+  </ul>
+  <a href="#waitlist" class="nav-cta">Get Early Access</a>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-sky"></div>
+  <div class="hero-bands"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-haze"></div>
+  <div class="hero-fade-top"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">AI Business Partner</div>
+
+    <h1 class="hero-headline">
+      I'm the AI business partner<br>that scales your output,<br><em>not your overhead.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Fido Financial handles the painful daily grind, so you can spend more time doing what you love. Stop Working For the Man (SWFTM™).
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#waitlist" class="btn-primary">Get Early Access</a>
+      <a href="#manifesto" class="btn-ghost">Read the Manifesto →</a>
+    </div>
+  </div>
+
+  <div class="hero-card-wrap">
+    <div class="hero-card">
+      <div class="card-topbar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="card-title">Fido — Business Partner</span>
+      </div>
+      <div class="card-body">
+        <div class="card-greeting">Good morning. What should we tackle today?</div>
+        <div class="card-chips">
+          <div class="chip chip-hi">Apply for SBA loan</div>
+          <div class="chip">File annual report</div>
+          <div class="chip">Review cash flow</div>
+          <div class="chip">Find new customers</div>
+          <div class="chip">Pay invoices</div>
+        </div>
+        <div class="card-input-row">
+          <span class="card-input-text">Ask Fido anything about your business…</span>
+          <div class="card-send">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6h8M7 3l3 3-3 3" stroke="#0C0906" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-fade-bottom"></div>
+</section>
+
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-value">33M</div><div class="stat-label">Small businesses in the US</div></div>
+  <div class="stat-item"><div class="stat-value">$500B</div><div class="stat-label">Serviceable market</div></div>
+  <div class="stat-item"><div class="stat-value">62M</div><div class="stat-label">Americans employed by SMBs</div></div>
+  <div class="stat-item"><div class="stat-value">46%</div><div class="stat-label">Of private-sector GDP</div></div>
+</div>
+
+
+<div class="page">
+
+  <!-- PROBLEM -->
+  <section class="section reveal" id="problem">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-headline">Running a small business is still impossibly hard</h2>
+    <p class="section-body">Tens of millions of people want to work for themselves. Only a fraction succeed, held back not by ambition, but by the complexity of starting, funding, and growing a business without a team behind them.</p>
+    <div class="problem-grid">
+      <div class="problem-cell"><div class="problem-num">01</div><div class="problem-title">Getting Funded</div><div class="problem-text">Predatory rates, opaque processes, and application nightmares keep small businesses from the capital they need to grow.</div></div>
+      <div class="problem-cell"><div class="problem-num">02</div><div class="problem-title">Staying Compliant</div><div class="problem-text">LLC filings, annual reports, registered agent requirements: a constant compliance burden most owners aren't equipped to navigate alone.</div></div>
+      <div class="problem-cell"><div class="problem-num">03</div><div class="problem-title">Operating the Business</div><div class="problem-text">Getting customers, managing cash flow, paying vendors, handling invoices. Fido automates the work owners dislike most.</div></div>
+    </div>
+    <div class="pull-quote">"We are not building software that helps small businesses manage their problems. We are building an agent that eliminates them."</div>
+  </section>
+
+  <!-- PRODUCT -->
+  <section class="section reveal" id="product">
+    <div class="section-label">Product</div>
+    <h2 class="section-headline">An AI that does the work, not just helps you do it</h2>
+    <p class="section-body">Fido is an orchestration layer of specialized AI agents, each owning a mission-critical function, each executing autonomously on your behalf. Tell Fido what you need. Fido does it.</p>
+    <div class="product-grid">
+      <div class="product-cell"><div class="product-num">01 — Business Funding</div><div class="product-title">We get you funded.</div><div class="product-not">A platform that manages the funding process</div><div class="product-is">Fido pulls your data, builds the application package, matches the right lender, and submits on your behalf. You get funded. We earn at close.</div></div>
+      <div class="product-cell"><div class="product-num">02 — Incorporation & Compliance</div><div class="product-title">We keep you legal, forever.</div><div class="product-not">Software to manage LLC formation and compliance workflows</div><div class="product-is">An agent that gets your business incorporated and maintains compliance in perpetuity: filings, renewals, registered agent — all handled without you lifting a finger.</div></div>
+      <div class="product-cell"><div class="product-num">03 — Business Intelligence</div><div class="product-title">We watch the numbers for you.</div><div class="product-not">A dashboard with charts and KPI tracking</div><div class="product-is">A real-time health monitor that surfaces what matters, flags what's broken, and tells you exactly what to do next. Before problems grow.</div></div>
+      <div class="product-cell"><div class="product-num">04 — Growth & Revenue</div><div class="product-title">We find your next customer.</div><div class="product-not">Marketing automation tools and campaign builders</div><div class="product-is">An agent that identifies opportunities, drafts campaigns, builds your presence, and gets your next customer. Entirely on your behalf.</div></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section reveal" id="how">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-headline">Three steps to having Fido help operate your business</h2>
+    <div class="steps">
+      <div class="step-row"><div class="step-num">01</div><div><div class="step-title">Tell Fido about your business</div><div class="step-text">Connect your accounts, describe your goals, and give Fido the context it needs. Takes about ten minutes. No forms, no lawyers, no accountants required upfront.</div></div></div>
+      <div class="step-row"><div class="step-num">02</div><div><div class="step-title">Fido gets to work</div><div class="step-text">Specialized agents handle your funding applications, compliance filings, financial monitoring, and growth efforts, running continuously while you focus on your business.</div></div></div>
+      <div class="step-row"><div class="step-num">03</div><div><div class="step-title">You focus on the work only you can do</div><div class="step-text">Fido reports on what it's done, what it's working on, and what it needs from you. The tedious work disappears. The important decisions stay with you.</div></div></div>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- MANIFESTO — dark -->
+<section class="manifesto-section" id="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-eyebrow">The Fido Manifesto</div>
+    <div class="manifesto-swftm">SWFTM.</div>
+    <div class="manifesto-expand">Stop Working For The Man</div>
+    <div class="manifesto-line">Tens of millions of people want to work for themselves.<br><strong>Only a fraction succeed.</strong></div>
+    <div class="manifesto-line">Of the <strong>33 million small businesses</strong> in the United States, too many fail. And even more people <em>never get started</em>, held back by the complexity of forming an entity, finding capital, acquiring customers, and recruiting talent. Not for lack of ambition. For lack of support.</div>
+    <div class="manifesto-line">Artificial intelligence holds tremendous promise. It also prompts a real fear: that small businesses could be rendered irrelevant, replaced by AI agents that perform <strong>better, faster, and more cheaply than human labor.</strong></div>
+    <div class="manifesto-line"><em>We reject that future.</em></div>
+    <div class="manifesto-line">Fido Financial believes that anyone with the desire and work ethic to build something of their own deserves the opportunity to succeed. That AI should be deployed <strong>not to replace human talent, but to amplify it.</strong> That technology, wielded rightly, leads to prosperity and abundance for the people who take the risk to build.</div>
+    <div class="manifesto-line">By deploying a specialized set of AI capabilities tailored to the exact pain points small business owners face, Fido becomes a <strong>limitless workforce</strong>, handling every tedious function the owner hates, so they can focus entirely on the work only they can do.</div>
+    <div class="manifesto-line">With Fido, aspiring business owners can <em>SWFTM™</em>, knowing they have instant access to the world's top business minds to <strong>start, fund, and grow</strong> their business. A loyal companion. A relentless operator. A partner that never sleeps.</div>
+  </div>
+</section>
+
+
+<div class="page">
+
+  <!-- PARTNERS -->
+  <section class="section reveal" id="partners">
+    <div class="section-label">Partners</div>
+    <h2 class="section-headline">Power your customers with Fido</h2>
+    <p class="section-body">Fido is built to integrate into the ecosystems that already serve small business owners. If your business touches the SMB market, Fido makes your offering dramatically more valuable.</p>
+    <div class="partners-grid">
+      <div class="partner-cell"><div class="partner-icon-wrap"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2v10" stroke="#9A8B78" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="partner-title">Lenders & ISOs</div><div class="partner-text">Integrate Fido's funding agent into your origination flow. We prepare the borrower, complete the application, and deliver a cleaner book, so you close more, faster, with less friction.</div></div>
+      <div class="partner-cell"><div class="partner-icon-wrap"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="4" width="10" height="7" rx="1.2" stroke="#9A8B78" stroke-width="1.2"/><path d="M5 4V3a1 1 0 011-1h2a1 1 0 011 1v1" stroke="#9A8B78" stroke-width="1.2"/></svg></div><div class="partner-title">Accountants & Advisors</div><div class="partner-text">Offer your clients a Fido-powered back office. White-label the agents, keep the relationship, and deliver better outcomes without scaling your headcount.</div></div>
+      <div class="partner-cell"><div class="partner-icon-wrap"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#9A8B78" stroke-width="1.2"/><path d="M7 4.5V7.5l2 1.2" stroke="#9A8B78" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="partner-title">Franchisors & Associations</div><div class="partner-text">Deploy Fido across your franchise network or member base. Every location gets an AI-powered operator that maintains standards, handles compliance, and drives growth.</div></div>
+    </div>
+    <a href="mailto:support@fidofinancial.com" class="partner-cta">Become a Partner</a>
+  </section>
+
+  <!-- VISION -->
+  <section class="section reveal" id="vision">
+    <div class="section-label">Vision</div>
+    <h2 class="section-headline">Every great business deserves a trusted partner</h2>
+    <p class="section-body">Every great business eventually has a trusted advisor: an accountant who knows the numbers inside out, a banker who picks up the phone, a lawyer who prevents problems before they happen. For most of history, that relationship has been available only to companies large enough to pay for it. Fido makes it available to everyone.</p>
+    <div class="pull-quote">"We named it Fido because that's what it is. Always there. Always loyal. Never asks for credit. Just gets it done."</div>
+    <p class="section-body">The AI operating system of the American small business. The single trusted entity that knows more about how a business runs than the owner themselves, and works every day to make it better.</p>
+  </section>
+
+</div>
+
+
+<!-- CTA -->
+<section class="cta-section" id="waitlist">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="cta-eyebrow">Early Access</div>
+      <h2 class="cta-headline">Stop working for the man. Start with Fido.</h2>
+      <ul class="cta-perks">
+        <li class="cta-perk">Funding applications handled end-to-end</li>
+        <li class="cta-perk">Incorporation and compliance on autopilot</li>
+        <li class="cta-perk">Business intelligence without the dashboard</li>
+        <li class="cta-perk">Growth and revenue, driven by agents</li>
+      </ul>
+    </div>
+    <div class="cta-right">
+      <form class="cta-form" onsubmit="handleCTA(event)">
+        <input class="cta-input" type="text" name="name" placeholder="Your name" required />
+        <input class="cta-input" type="email" name="email" placeholder="your@email.com" required />
+        <input class="cta-input" type="text" name="business" placeholder="Your business name (optional)" />
+        <input class="cta-input" type="url" name="website" placeholder="Your business website (optional)" />
+        <input class="cta-input" type="tel" name="phone" placeholder="Your phone number (optional)" />
+        <button class="cta-submit" type="submit">Request Early Access</button>
+      </form>
+      <div class="cta-note" id="cta-note">We're onboarding a limited first cohort. We'll reach out personally.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-seal"><span class="footer-seal-f">f</span></div>
+      <span class="footer-name">Fido Financial</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#manifesto">Manifesto</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="mailto:support@fidofinancial.com">Contact</a></li>
+    </ul>
+    <div class="footer-legal">© 2026 SBA Fintech Inc. · All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+revealEls.forEach(el => revealObs.observe(el));
+
+const mLines = document.querySelectorAll('.manifesto-line');
+const mObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      el.style.transitionDelay = `${[...mLines].indexOf(el) * 0.08}s`;
+      el.classList.add('visible');
+      mObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.1 });
+mLines.forEach(l => mObs.observe(l));
+
+function handleCTA(e) {
+  e.preventDefault();
+  const d = new FormData(e.target);
+  const subject = encodeURIComponent('Early Access Request');
+  const body = encodeURIComponent(`Name: ${d.get('name')}\nEmail: ${d.get('email')}\nBusiness: ${d.get('business')}\nWebsite: ${d.get('website')}\nPhone: ${d.get('phone')}`);
+  window.location.href = `mailto:support@fidofinancial.com?subject=${subject}&body=${body}`;
+  document.getElementById('cta-note').textContent = "You're on the list. We'll be in touch personally.";
+  const btn = e.target.querySelector('.cta-submit');
+  btn.textContent = 'Done.'; btn.disabled = true;
+  e.target.querySelectorAll('.cta-input').forEach(i => { i.disabled = true; i.style.opacity = '0.35'; });
+}
+</script>
+</body>
+</html>
