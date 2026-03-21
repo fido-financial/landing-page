@@ -59,7 +59,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      height: 58px;
+      height: 64px;
       background: rgba(12,9,6,0.70);
       border-bottom: 1px solid var(--rule-dark);
       backdrop-filter: blur(20px);
@@ -67,66 +67,65 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 52px;
+      padding: 0 48px;
     }
 
-    .nav-mark {
-      display: flex; align-items: center; gap: 11px;
-      text-decoration: none;
-    }
-
-    .nav-seal {
-      width: 32px; height: 32px;
-      border: 1.5px solid rgba(234,224,204,0.28);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: border-color 0.2s;
-    }
-
-    .nav-mark:hover .nav-seal { border-color: var(--gold-hi); }
-
-    .nav-seal-f {
-      font-family: 'IBM Plex Mono', monospace;
-      font-style: italic;
-      font-weight: 400;
-      font-size: 15px;
-      color: var(--cream);
-      line-height: 1;
-    }
-
-    .nav-wordmark {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: rgba(234,224,204,0.5);
-    }
-
+    /* nav links — left side */
     .nav-links {
       display: flex; gap: 36px; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
     }
 
     .nav-links a {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.08em;
-      color: rgba(234,224,204,0.38);
+      letter-spacing: 0.1em;
+      color: rgba(234,224,204,0.32);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover { color: rgba(234,224,204,0.75); }
 
+    /* logo lockup — right side, SWFTM. style */
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-decoration: none;
+      line-height: 1;
+      gap: 3px;
+    }
+
+    .nav-logo-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .nav-logo-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(234,224,204,0.3);
+      line-height: 1;
+    }
+
+    .nav-logo:hover .nav-logo-name { opacity: 0.75; }
+
+    /* early access pill — center */
     .nav-cta {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.1em;
+      font-size: 9px;
+      letter-spacing: 0.12em;
       color: var(--dark);
-      background: var(--cream);
+      background: rgba(234,224,204,0.88);
       text-decoration: none;
-      padding: 11px 24px;
+      padding: 10px 22px;
       border-radius: 100px;
       transition: opacity 0.2s, transform 0.15s;
       white-space: nowrap;
@@ -737,22 +736,20 @@
       gap: 32px; flex-wrap: wrap;
     }
 
-    .footer-logo { display: flex; align-items: center; gap: 11px; }
+    .footer-logo { display: flex; flex-direction: column; gap: 4px; }
 
-    .footer-seal {
-      width: 28px; height: 28px;
-      border: 1px solid rgba(234,224,204,0.15); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+    .footer-name-display {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300; font-size: 20px;
+      letter-spacing: -0.01em; color: rgba(234,224,204,0.6);
+      line-height: 1;
     }
 
-    .footer-seal-f {
-      font-family: 'IBM Plex Mono', monospace; font-style: italic;
-      font-size: 14px; font-weight: 400; color: var(--cream);
-    }
-
-    .footer-name {
-      font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
-      letter-spacing: 0.12em; color: rgba(234,224,204,0.3);
+    .footer-name-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300; font-size: 8px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(234,224,204,0.2); line-height: 1;
     }
 
     .footer-links { display: flex; gap: 32px; list-style: none; }
@@ -811,10 +808,6 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-mark">
-    <div class="nav-seal"><span class="nav-seal-f">f</span></div>
-    <span class="nav-wordmark">Fido Financial</span>
-  </a>
   <ul class="nav-links">
     <li><a href="#product">Product</a></li>
     <li><a href="#manifesto">Manifesto</a></li>
@@ -822,6 +815,10 @@
     <li><a href="#vision">Vision</a></li>
   </ul>
   <a href="#waitlist" class="nav-cta">Get Early Access</a>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">Fido Financial.</span>
+    <span class="nav-logo-sub">Stop Working For The Man</span>
+  </a>
 </nav>
 
 
@@ -1010,8 +1007,8 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-seal"><span class="footer-seal-f">f</span></div>
-      <span class="footer-name">Fido Financial</span>
+      <div class="footer-name-display">Fido Financial.</div>
+      <div class="footer-name-sub">Stop Working For The Man</div>
     </div>
     <ul class="footer-links">
       <li><a href="#product">Product</a></li>
