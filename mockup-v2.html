@@ -148,28 +148,27 @@
       padding: 130px 52px 0;
     }
 
-    /* Layered sky — lighter, hazy, warm dawn */
+    /* Layered sky — light, hazy, warm dawn */
     .hero-sky {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 110% 55% at 50% 100%, rgba(90,50,10,0.55)  0%, transparent 65%),
-        radial-gradient(ellipse  70% 38% at 50% 88%,  rgba(160,90,20,0.28) 0%, transparent 55%),
-        radial-gradient(ellipse  55% 28% at 28% 72%,  rgba(40,70,110,0.22) 0%, transparent 50%),
-        radial-gradient(ellipse  50% 22% at 76% 68%,  rgba(30,60,100,0.18) 0%, transparent 45%),
-        /* warm haze at mid-horizon */
-        radial-gradient(ellipse 100% 30% at 50% 56%,  rgba(160,120,60,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 45% at 50% 100%, rgba(120,70,10,0.35)  0%, transparent 65%),
+        radial-gradient(ellipse  65% 30% at 50% 86%,  rgba(190,120,30,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse  55% 25% at 25% 65%,  rgba(80,110,150,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse  50% 20% at 78% 62%,  rgba(60,100,140,0.12) 0%, transparent 45%),
+        radial-gradient(ellipse 110% 35% at 50% 52%,  rgba(180,150,90,0.1)  0%, transparent 70%),
         linear-gradient(
           to bottom,
-          #111820 0%,
-          #182336 14%,
-          #233A55 28%,
-          #304E6A 42%,
-          #456070 54%,
-          #6A7060 64%,
-          #8A7248 74%,
-          #6A4E22 84%,
-          #3A2810 94%,
-          #1C1208 100%
+          #2A3340 0%,
+          #334458 14%,
+          #435E78 28%,
+          #5A7488 42%,
+          #728590 54%,
+          #908A78 64%,
+          #A89060 74%,
+          #8A6830 84%,
+          #5A3E14 94%,
+          #2E1C08 100%
         );
     }
 
@@ -194,16 +193,16 @@
       z-index: 2; pointer-events: none;
     }
 
-    /* atmospheric haze — makes it feel less harsh */
+    /* atmospheric haze — soft vignette only */
     .hero-haze {
       position: absolute; inset: 0; z-index: 3;
-      background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(12,9,6,0.3) 100%);
+      background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(12,9,6,0.15) 100%);
       pointer-events: none;
     }
 
     .hero-fade-top {
-      position: absolute; top: 0; left: 0; right: 0; height: 140px;
-      background: linear-gradient(to bottom, var(--dark) 0%, transparent 100%);
+      position: absolute; top: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(to bottom, rgba(42,51,64,0.9) 0%, transparent 100%);
       z-index: 4;
     }
 
