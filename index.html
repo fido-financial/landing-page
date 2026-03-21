@@ -785,9 +785,104 @@
     /* ══════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════ */
+    /* ── Hamburger button ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── Mobile dropdown menu ── */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(12,9,6,0.97);
+      border-bottom: 1px solid var(--rule-dark);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 99;
+      padding: 0;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .nav-mobile-menu.open {
+      max-height: 400px;
+    }
+
+    .nav-mobile-menu ul {
+      list-style: none;
+      padding: 8px 0 4px;
+    }
+
+    .nav-mobile-menu ul li a {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,238,226,0.70);
+      text-decoration: none;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-mobile-menu ul li a:hover {
+      color: var(--cream);
+      background: rgba(244,238,226,0.04);
+    }
+
+    .nav-mobile-menu .nav-mobile-cta {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: rgba(244,238,226,0.96);
+      text-decoration: none;
+      text-align: center;
+      padding: 18px 24px;
+      margin: 16px 24px 24px;
+      border-radius: 100px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-mobile-menu .nav-mobile-cta:hover { opacity: 0.85; }
+
     @media (max-width: 768px) {
-      nav { padding: 0 20px; }
+      nav { padding: 0 20px; height: 60px; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-mobile-menu { display: block; }
+      .nav-logo-name { font-size: 18px; }
+
       .hero { padding: 100px 24px 0; }
       .hero-card-wrap { max-width: 100%; }
       .stats-bar { gap: 28px; padding: 32px 24px; }
@@ -801,6 +896,7 @@
       .cta-inner { grid-template-columns: 1fr; gap: 44px; padding: 64px 24px 80px; }
       footer { padding: 40px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
     }
   </style>
 </head>
@@ -819,8 +915,20 @@
     <li><a href="#vision">Vision</a></li>
   </ul>
   <a href="#waitlist" class="nav-cta">Get Early Access</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <ul>
+    <li><a href="#product">Product</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#vision">Vision</a></li>
+  </ul>
+  <a href="#waitlist" class="nav-mobile-cta">Get Early Access</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1040,6 +1148,21 @@ const mObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 mLines.forEach(l => mObs.observe(l));
+
+const hamburger = document.getElementById('nav-hamburger');
+const mobileMenu = document.getElementById('nav-mobile-menu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open);
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
 
 function handleCTA(e) {
   e.preventDefault();
