@@ -315,12 +315,12 @@
     }
 
     .hero-card {
-      background: rgba(22,16,9,0.82);
+      background: rgba(18,13,8,0.88);
       border: 1px solid rgba(255,255,255,0.09);
       border-radius: 14px;
-      overflow: hidden;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
       box-shadow: 0 32px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+      overflow: hidden;
     }
 
     .card-topbar {
@@ -328,6 +328,7 @@
       padding: 13px 18px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.02);
+      flex-shrink: 0;
     }
 
     .dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -336,54 +337,235 @@
     .card-title {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 9px; letter-spacing: 0.1em;
-      color: rgba(244,238,226,0.60); margin-left: 6px;
+      color: rgba(244,238,226,0.50); margin-left: 6px;
     }
 
-    .card-body { padding: 24px; }
+    .card-status-dot {
+      margin-left: auto;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(74,186,106,0.80);
+      animation: agentPulse 2s ease-in-out infinite;
+    }
 
+    /* ── card body: scrollable conversation area ── */
+    .card-body {
+      padding: 20px 22px;
+      max-height: 320px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(244,238,226,0.12) transparent;
+    }
+    .card-body::-webkit-scrollbar { width: 3px; }
+    .card-body::-webkit-scrollbar-thumb { background: rgba(244,238,226,0.12); border-radius: 3px; }
+
+    /* ── greeting / empty state ── */
     .card-greeting {
       font-family: 'Inter', sans-serif;
-      font-size: 15px; font-weight: 600;
-      color: var(--cream); margin-bottom: 18px;
+      font-size: 14px; font-weight: 600;
+      color: var(--cream); margin-bottom: 16px;
     }
 
-    .card-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .card-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
 
     .chip {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 9px; letter-spacing: 0.06em;
-      color: rgba(244,238,226,0.78);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(244,238,226,0.75);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.11);
       border-radius: 100px; padding: 7px 14px;
-      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+      cursor: pointer; transition: background 0.18s, border-color 0.18s, transform 0.12s;
     }
-
-    .chip:hover { background: rgba(244,238,226,0.14); border-color: rgba(244,238,226,0.36); }
-
+    .chip:hover {
+      background: rgba(244,238,226,0.13);
+      border-color: rgba(244,238,226,0.34);
+      transform: translateY(-1px);
+    }
     .chip-hi {
       color: var(--cream);
-      background: rgba(244,238,226,0.16);
-      border-color: rgba(244,238,226,0.40);
+      background: rgba(244,238,226,0.14);
+      border-color: rgba(244,238,226,0.38);
     }
 
+    /* ── conversation messages ── */
+    .hd-msgs { display: flex; flex-direction: column; gap: 12px; }
+
+    .hd-msg-user {
+      display: flex; justify-content: flex-end;
+    }
+    .hd-msg-user-bubble {
+      background: rgba(244,238,226,0.14);
+      border: 1px solid rgba(244,238,226,0.18);
+      color: var(--cream);
+      font-size: 12px; line-height: 1.6;
+      padding: 9px 14px;
+      border-radius: 12px 12px 2px 12px;
+      max-width: 80%;
+    }
+
+    .hd-msg-fido { display: flex; gap: 9px; align-items: flex-start; }
+    .hd-msg-fido-av {
+      width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
+      background: rgba(244,238,226,0.10);
+      border: 1px solid rgba(244,238,226,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 300; color: var(--cream);
+      margin-top: 2px;
+    }
+    .hd-msg-fido-inner { flex: 1; min-width: 0; }
+    .hd-msg-fido-bubble {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 2px 12px 12px 12px;
+      font-size: 12px; line-height: 1.65; color: var(--cream-mid);
+      padding: 10px 14px;
+    }
+
+    /* ── status pill ── */
+    .hd-status {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: rgba(244,238,226,0.40);
+      letter-spacing: 0.06em;
+      margin-bottom: 7px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hd-status-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(244,238,226,0.30);
+      animation: agentPulse 1.4s ease-in-out infinite;
+    }
+
+    /* ── typing dots ── */
+    .hd-typing {
+      display: flex; align-items: center; gap: 4px;
+      padding: 9px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px 12px 12px 12px;
+      width: fit-content;
+    }
+    .hd-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(244,238,226,0.40);
+      animation: hdBounce 1.2s ease-in-out infinite;
+    }
+    .hd-dot:nth-child(2) { animation-delay: 0.16s; }
+    .hd-dot:nth-child(3) { animation-delay: 0.32s; }
+    @keyframes hdBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    /* ── rich data card (dark) ── */
+    .hd-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 9px;
+      animation: fadeUp 0.3s ease both;
+    }
+    .hd-card-header {
+      padding: 11px 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hd-card-title {
+      font-size: 11px; font-weight: 600; color: var(--cream);
+    }
+    .hd-card-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px; letter-spacing: 0.08em;
+      padding: 2px 8px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(244,238,226,0.50);
+      margin-left: auto;
+    }
+    .hd-card-row {
+      display: flex;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hd-card-row:last-child { border-bottom: none; }
+    .hd-card-cell {
+      flex: 1; padding: 9px 14px;
+    }
+    .hd-card-cell + .hd-card-cell {
+      border-left: 1px solid rgba(255,255,255,0.05);
+    }
+    .hd-card-cell-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 7.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(244,238,226,0.32);
+      margin-bottom: 3px;
+    }
+    .hd-card-cell-val {
+      font-size: 13px; font-weight: 700;
+      color: var(--cream); letter-spacing: -0.3px;
+    }
+    .hd-card-cell-sub {
+      font-size: 9px; color: rgba(244,238,226,0.38); margin-top: 2px;
+    }
+    .hd-val-warn { color: #E87050; }
+    .hd-val-good { color: #5ABF7A; }
+
+    /* ── quick replies ── */
+    .hd-replies {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 11px 0 4px 33px;
+    }
+    .hd-reply {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.04em;
+      color: rgba(244,238,226,0.55);
+      border: 1px solid rgba(244,238,226,0.14);
+      border-radius: 100px; padding: 5px 12px;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .hd-reply:hover {
+      background: rgba(244,238,226,0.08);
+      border-color: rgba(244,238,226,0.30);
+      color: var(--cream);
+    }
+
+    /* ── input row ── */
     .card-input-row {
       display: flex; align-items: center; gap: 10px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 9px; padding: 10px 14px;
     }
-
     .card-input-text {
       flex: 1;
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px; font-weight: 300;
-      color: rgba(244,238,226,0.55); letter-spacing: 0;
+      color: rgba(244,238,226,0.45); letter-spacing: 0;
     }
-
     .card-send {
       width: 28px; height: 28px; background: var(--cream);
       border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    .card-send:hover { opacity: 0.75; }
+
+    /* ── reset link ── */
+    .hd-reset {
+      display: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8.5px; letter-spacing: 0.1em;
+      color: rgba(244,238,226,0.38);
+      background: none; border: none; cursor: pointer;
+      padding: 0; margin-left: auto;
+      transition: color 0.15s;
+    }
+    .hd-reset:hover { color: rgba(244,238,226,0.75); }
+    .hd-footer {
+      padding: 10px 22px 14px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     /* ══════════════════════════════════
@@ -653,6 +835,592 @@
        CTA  — slightly deeper parch
     ══════════════════════════════════ */
     .cta-section { background: var(--parch-alt); border-top: 1px solid var(--ink-rule); }
+
+    /* ══════════════════════════════════
+       INTERACTIVE DEMO SECTION
+    ══════════════════════════════════ */
+    .demo-section {
+      background: var(--parch-alt);
+      border-top: 1px solid var(--ink-rule);
+      padding: 100px 0 80px;
+    }
+
+    .demo-intro {
+      margin-bottom: 56px;
+    }
+
+    /* ── Browser chrome ── */
+    .demo-browser {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(16,12,8,0.13), 0 4px 16px rgba(16,12,8,0.07);
+    }
+
+    .demo-chrome {
+      background: #2A2420;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .demo-chrome-dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .demo-chrome-dots span {
+      width: 11px; height: 11px; border-radius: 50%;
+    }
+    .demo-chrome-dots span:nth-child(1) { background: #FF5F57; }
+    .demo-chrome-dots span:nth-child(2) { background: #FFBD2E; }
+    .demo-chrome-dots span:nth-child(3) { background: #28C840; }
+
+    .demo-chrome-bar {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: rgba(244,238,226,0.50);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .demo-chrome-lock {
+      color: rgba(244,238,226,0.35);
+      display: flex;
+      align-items: center;
+    }
+
+    /* ── App shell ── */
+    .demo-app {
+      display: flex;
+      height: 520px;
+      background: #ffffff;
+    }
+
+    /* ── Sidebar ── */
+    .demo-sidebar {
+      width: 200px;
+      min-width: 200px;
+      background: #ffffff;
+      border-right: 1px solid rgba(16,12,8,0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .demo-sb-logo {
+      padding: 16px 14px 13px;
+      border-bottom: 1px solid rgba(16,12,8,0.08);
+    }
+
+    .demo-sb-logo-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 15px;
+      color: #100C08;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .demo-sb-logo-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 300;
+      font-size: 6.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(16,12,8,0.40);
+      margin-top: 4px;
+      line-height: 1;
+    }
+
+    .demo-sb-nav {
+      flex: 1;
+      padding: 8px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .demo-sb-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 0 9px;
+      height: 32px;
+      border-radius: 5px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 300;
+      color: rgba(16,12,8,0.45);
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      position: relative;
+    }
+
+    .demo-sb-item.active {
+      background: rgba(16,12,8,0.07);
+      color: #100C08;
+    }
+
+    .demo-sb-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 2px;
+      border-radius: 2px;
+      background: #100C08;
+    }
+
+    .demo-sb-item:not(.active):hover {
+      background: rgba(16,12,8,0.04);
+      color: rgba(16,12,8,0.70);
+    }
+
+    .demo-sb-user {
+      padding: 11px 12px;
+      border-top: 1px solid rgba(16,12,8,0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-sb-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(16,12,8,0.07);
+      border: 1px solid rgba(16,12,8,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 400; color: #100C08;
+      flex-shrink: 0;
+    }
+
+    .demo-sb-uname {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: #100C08; font-weight: 400;
+    }
+
+    .demo-sb-ubiz {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8.5px; color: rgba(16,12,8,0.40);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* ── Main content ── */
+    .demo-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: #ffffff;
+    }
+
+    .demo-topbar {
+      height: 44px;
+      border-bottom: 1px solid rgba(16,12,8,0.08);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .demo-topbar-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(16,12,8,0.40);
+    }
+
+    .demo-topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-credit-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border: 1px solid rgba(16,12,8,0.12);
+      border-radius: 100px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: rgba(16,12,8,0.50);
+    }
+
+    /* ── Canvas (chat area) ── */
+    .demo-canvas {
+      flex: 1;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* ── Empty state ── */
+    .demo-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 32px 20px;
+      min-height: 100%;
+    }
+
+    .demo-fido-avatar {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: #100C08;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px; font-weight: 300;
+      color: #F4EEE2;
+      margin-bottom: 16px;
+    }
+
+    .demo-greeting {
+      font-size: 20px;
+      font-weight: 700;
+      color: #100C08;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .demo-greeting-sub {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(16,12,8,0.55);
+      line-height: 1.7;
+      max-width: 380px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .demo-nudges {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .demo-nudge {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(16,12,8,0.10);
+      background: #F7F7F5;
+      cursor: pointer;
+      text-align: left;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #100C08;
+      line-height: 1.45;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
+    }
+
+    .demo-nudge svg { flex-shrink: 0; margin-top: 1px; color: rgba(16,12,8,0.45); }
+
+    .demo-nudge:hover {
+      background: #EEECEA;
+      border-color: rgba(16,12,8,0.20);
+      transform: translateY(-1px);
+    }
+
+    /* ── Conversation ── */
+    .demo-convo {
+      padding: 20px 20px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .demo-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── Message bubbles ── */
+    .demo-msg-user {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .demo-msg-user-bubble {
+      background: #100C08;
+      color: #F4EEE2;
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 9px 14px;
+      border-radius: 12px 12px 2px 12px;
+      max-width: 72%;
+    }
+
+    .demo-msg-fido {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .demo-msg-fido-avatar {
+      width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0;
+      background: #100C08;
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 300; color: #F4EEE2;
+      margin-top: 2px;
+    }
+
+    .demo-msg-fido-content {
+      max-width: 82%;
+    }
+
+    .demo-msg-fido-bubble {
+      background: #F7F7F5;
+      border: 1px solid rgba(16,12,8,0.08);
+      border-radius: 2px 12px 12px 12px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: #100C08;
+      padding: 10px 14px;
+    }
+
+    /* ── Typing dots ── */
+    .demo-typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: #F7F7F5;
+      border: 1px solid rgba(16,12,8,0.08);
+      border-radius: 2px 12px 12px 12px;
+      width: fit-content;
+    }
+
+    .demo-typing-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(16,12,8,0.30);
+      animation: demoDotBounce 1.2s ease-in-out infinite;
+    }
+    .demo-typing-dot:nth-child(2) { animation-delay: 0.18s; }
+    .demo-typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+    @keyframes demoDotBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40%           { transform: translateY(-4px); opacity: 1; }
+    }
+
+    /* ── Status pill (while thinking) ── */
+    .demo-status-pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: rgba(16,12,8,0.45);
+      letter-spacing: 0.06em;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .demo-status-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(16,12,8,0.25);
+      animation: agentPulse 1.4s ease-in-out infinite;
+    }
+
+    /* ── Rich cards ── */
+    .demo-card {
+      background: #ffffff;
+      border: 1px solid rgba(16,12,8,0.09);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+      animation: fadeUp 0.35s ease both;
+    }
+
+    .demo-card-header {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(16,12,8,0.07);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .demo-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #100C08;
+    }
+
+    .demo-card-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 100px;
+      border: 1px solid rgba(16,12,8,0.12);
+      color: rgba(16,12,8,0.50);
+      margin-left: auto;
+    }
+
+    .demo-card-row {
+      display: flex;
+      border-bottom: 1px solid rgba(16,12,8,0.06);
+    }
+
+    .demo-card-row:last-child { border-bottom: none; }
+
+    .demo-card-cell {
+      flex: 1;
+      padding: 11px 16px;
+    }
+
+    .demo-card-cell + .demo-card-cell {
+      border-left: 1px solid rgba(16,12,8,0.06);
+    }
+
+    .demo-card-cell-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(16,12,8,0.38);
+      margin-bottom: 4px;
+    }
+
+    .demo-card-cell-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: #100C08;
+      letter-spacing: -0.3px;
+    }
+
+    .demo-card-cell-sub {
+      font-size: 10px;
+      color: rgba(16,12,8,0.45);
+      margin-top: 2px;
+    }
+
+    .demo-card-cell-val.warn { color: #C05030; }
+    .demo-card-cell-val.good { color: #1E6B35; }
+
+    /* ── Quick replies ── */
+    .demo-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 12px 0 4px 35px;
+    }
+
+    .demo-reply-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: rgba(16,12,8,0.65);
+      border: 1px solid rgba(16,12,8,0.14);
+      border-radius: 100px;
+      padding: 5px 13px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .demo-reply-btn:hover {
+      background: rgba(16,12,8,0.04);
+      border-color: rgba(16,12,8,0.28);
+      color: #100C08;
+    }
+
+    /* ── Input bar ── */
+    .demo-input-bar {
+      border-top: 1px solid rgba(16,12,8,0.07);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .demo-input-field {
+      flex: 1;
+      font-size: 11.5px;
+      color: rgba(16,12,8,0.35);
+      background: #F7F7F5;
+      border: 1px solid rgba(16,12,8,0.08);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .demo-input-send {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: #100C08;
+      border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #F4EEE2;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+    .demo-input-send:hover { opacity: 0.75; }
+
+    /* ── Reset row ── */
+    .demo-reset-row {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .demo-reset {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      background: transparent;
+      border: 1px solid var(--ink-rule);
+      border-radius: 100px;
+      padding: 8px 22px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .demo-reset:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .demo-sidebar { display: none; }
+      .demo-browser { padding: 0 16px; }
+      .demo-app { height: 460px; }
+      .demo-nudges { grid-template-columns: 1fr; }
+    }
 
     .cta-inner {
       max-width: 1100px; margin: 0 auto; padding: 112px 80px 128px;
@@ -957,30 +1725,51 @@
 
   <div class="hero-card-wrap">
     <div class="hero-card">
+
+      <!-- Traffic lights topbar -->
       <div class="card-topbar">
         <div class="dot dot-r"></div>
         <div class="dot dot-y"></div>
         <div class="dot dot-g"></div>
         <span class="card-title">Fido — Business Partner</span>
+        <div class="card-status-dot"></div>
       </div>
-      <div class="card-body">
-        <div class="card-greeting">Good morning. What should we tackle today?</div>
-        <div class="card-chips">
-          <div class="chip chip-hi">Apply for SBA loan</div>
-          <div class="chip">File annual report</div>
-          <div class="chip">Review cash flow</div>
-          <div class="chip">Find new customers</div>
-          <div class="chip">Pay invoices</div>
+
+      <!-- Scrollable conversation body -->
+      <div class="card-body" id="hd-body">
+
+        <!-- Empty / greeting state -->
+        <div id="hd-empty">
+          <div class="card-greeting">Good morning. What should we tackle today?</div>
+          <div class="card-chips">
+            <button class="chip chip-hi" onclick="hdRun('health')">How is my business doing?</button>
+            <button class="chip" onclick="hdRun('funding')">Is now a good time to get funding?</button>
+            <button class="chip" onclick="hdRun('growth')">Help me get more customers</button>
+            <button class="chip" onclick="hdRun('email')">Draft a win-back email</button>
+          </div>
         </div>
+
+        <!-- Conversation (shown after chip click) -->
+        <div id="hd-convo" style="display:none">
+          <div class="hd-msgs" id="hd-msgs"></div>
+          <div class="hd-replies" id="hd-replies" style="display:none"></div>
+        </div>
+
+      </div>
+
+      <!-- Footer: input + reset -->
+      <div class="hd-footer">
         <div class="card-input-row">
-          <span class="card-input-text">Ask Fido anything about your business…</span>
+          <span class="card-input-text" id="hd-input-text">Ask Fido anything about your business…</span>
           <div class="card-send">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2 6h8M7 3l3 3-3 3" stroke="#0C0906" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 10V2M2.5 5.5L6 2L9.5 5.5" stroke="#0C0906" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
+        <button class="hd-reset" id="hd-reset" onclick="hdReset()">↺ Try another question</button>
       </div>
+
     </div>
   </div>
 
@@ -1037,6 +1826,134 @@
   </section>
 
 </div>
+
+
+<!-- DEMO SECTION REMOVED — demo lives in the hero card above -->
+<section class="demo-section reveal" id="demo" style="display:none">
+  <div class="demo-intro page">
+    <div class="section-label">Live Demo</div>
+    <h2 class="section-headline">See Fido in action</h2>
+    <p class="section-body">Click any question below to watch Fido analyze your business and respond in real time. This is exactly what it looks like inside the product.</p>
+  </div>
+
+  <!-- Browser chrome wrapper -->
+  <div class="demo-browser">
+    <div class="demo-chrome">
+      <div class="demo-chrome-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="demo-chrome-bar">
+        <span class="demo-chrome-lock">
+          <svg width="9" height="10" viewBox="0 0 9 10" fill="none"><rect x="1.5" y="4.5" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1"/><path d="M2.5 4.5V3a2 2 0 014 0v1.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        </span>
+        app.fidofinancial.com
+      </div>
+    </div>
+
+    <!-- App shell -->
+    <div class="demo-app">
+
+      <!-- Sidebar -->
+      <aside class="demo-sidebar">
+        <div class="demo-sb-logo">
+          <div class="demo-sb-logo-name">Fido Financial.</div>
+          <div class="demo-sb-logo-sub">Stop Working For The Man</div>
+        </div>
+        <div class="demo-sb-nav">
+          <div class="demo-sb-item active">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1.5" y="1.5" width="4" height="4" rx="0.8" stroke="currentColor" stroke-width="1.1"/><rect x="7.5" y="1.5" width="4" height="4" rx="0.8" stroke="currentColor" stroke-width="1.1"/><rect x="1.5" y="7.5" width="4" height="4" rx="0.8" stroke="currentColor" stroke-width="1.1"/><rect x="7.5" y="7.5" width="4" height="4" rx="0.8" stroke="currentColor" stroke-width="1.1"/></svg>
+            Home
+          </div>
+          <div class="demo-sb-item">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1.5" y="1.5" width="10" height="10" rx="1.2" stroke="currentColor" stroke-width="1.1"/><path d="M4 5.5h5M4 7.5h3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+            Tasks
+          </div>
+          <div class="demo-sb-item">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 2.5h9M2 5.5h9M2 8.5h5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            Business Plan
+          </div>
+          <div class="demo-sb-item">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M3 1.5h5l2.5 2.5V11.5a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5v-9.5a.5.5 0 01.5-.5z" stroke="currentColor" stroke-width="1.1"/><path d="M8 1.5V4H10.5" stroke="currentColor" stroke-width="1.1"/></svg>
+            Documents
+          </div>
+        </div>
+        <div class="demo-sb-user">
+          <div class="demo-sb-avatar">J</div>
+          <div>
+            <div class="demo-sb-uname">Jamie</div>
+            <div class="demo-sb-ubiz">Summit Grounds Coffee</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="demo-main">
+
+        <!-- Top bar -->
+        <div class="demo-topbar">
+          <span class="demo-topbar-label">HOME</span>
+          <div class="demo-topbar-right">
+            <div class="demo-credit-pill">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1L6.5 4H9.5L7 6L8 9L5 7.5L2 9L3 6L0.5 4H3.5L5 1Z" stroke="currentColor" stroke-width="0.9" stroke-linejoin="round"/></svg>
+              5,000 cr
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat / home canvas -->
+        <div class="demo-canvas" id="demo-canvas">
+
+          <!-- Empty state -->
+          <div class="demo-empty" id="demo-empty">
+            <div class="demo-fido-avatar">F</div>
+            <div class="demo-greeting">Good morning, Jamie.</div>
+            <div class="demo-greeting-sub">I'm tracking everything happening across Summit Grounds — finances, customers, compliance, and growth. What would you like to work on today?</div>
+            <div class="demo-nudges">
+              <button class="demo-nudge" data-scenario="health">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h2l2-4 2 8 2-4h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                How is my business doing?
+              </button>
+              <button class="demo-nudge" data-scenario="funding">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="4" width="11" height="7" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M5 4V3a1 1 0 011-1h2a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="7.5" r="1.2" stroke="currentColor" stroke-width="1.1"/></svg>
+                Is now a good time to get funding?
+              </button>
+              <button class="demo-nudge" data-scenario="growth">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10L5.5 6.5L7.5 8.5L12 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3h3v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Help me get more customers
+              </button>
+              <button class="demo-nudge" data-scenario="email">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3.5" width="11" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5L7 8.5L12.5 5.5" stroke="currentColor" stroke-width="1.2"/></svg>
+                Draft a customer win-back email
+              </button>
+            </div>
+          </div>
+
+          <!-- Conversation (hidden initially) -->
+          <div class="demo-convo" id="demo-convo" style="display:none">
+            <div class="demo-messages" id="demo-messages"></div>
+            <div class="demo-replies" id="demo-replies" style="display:none"></div>
+          </div>
+
+        </div>
+
+        <!-- Input bar -->
+        <div class="demo-input-bar">
+          <div class="demo-input-field" id="demo-input-field">Ask Fido anything about your business…</div>
+          <button class="demo-input-send" aria-label="Send">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 10V2M2.5 5.5L6 2L9.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+      </div><!-- /demo-main -->
+    </div><!-- /demo-app -->
+  </div><!-- /demo-browser -->
+
+  <div class="demo-reset-row">
+    <button class="demo-reset" id="demo-reset" style="display:none" onclick="demoReset()">
+      ↺ Try another question
+    </button>
+  </div>
+</section>
 
 
 <!-- MANIFESTO — dark -->
@@ -1163,6 +2080,276 @@ mobileMenu.querySelectorAll('a').forEach(a => {
     hamburger.setAttribute('aria-expanded', false);
   });
 });
+
+/* ══════════════════════════════════
+   HERO CARD — INTERACTIVE DEMO
+══════════════════════════════════ */
+const HD_SCENARIOS = {
+  health: {
+    prompt: 'How is my business doing right now?',
+    status: ['Pulling your accounts…', 'Analyzing cash flow and revenue…', 'Calculating business health score…'],
+    message: "Here's a real-time snapshot of Summit Grounds. A few things stand out — your runway is below the 9-month cushion, but your $8,400 in overdue receivables is recoverable fast. Clearing that would meaningfully change your outlook.",
+    card: `<div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">Business Health</div>
+        <div class="hd-card-badge" style="background:rgba(192,80,48,0.08);border-color:rgba(192,80,48,0.2);color:#C05030;">64 / 100 — Needs attention</div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Monthly Revenue</div>
+          <div class="hd-card-cell-val">$18,400</div>
+          <div class="hd-card-cell-sub">↑ 4% vs last month</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Cash Runway</div>
+          <div class="hd-card-cell-val hd-val-warn">5.2 months</div>
+          <div class="hd-card-cell-sub">Target: 9+ months</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Overdue AR</div>
+          <div class="hd-card-cell-val hd-val-warn">$8,400</div>
+          <div class="hd-card-cell-sub">3 invoices, 30–60 days</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Gross Margin</div>
+          <div class="hd-card-cell-val hd-val-good">62%</div>
+          <div class="hd-card-cell-sub">Industry avg: 58%</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">DSCR</div>
+          <div class="hd-card-cell-val">1.24</div>
+          <div class="hd-card-cell-sub">Loan-eligible threshold</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Net Promoter</div>
+          <div class="hd-card-cell-val hd-val-good">72</div>
+          <div class="hd-card-cell-sub">Top quartile</div>
+        </div>
+      </div>
+    </div>`,
+    replies: ['Show me an action plan', "What's my biggest risk right now?", 'How do I improve my score?'],
+  },
+  funding: {
+    prompt: 'Is now a good time to get funding?',
+    status: ['Reviewing your revenue history…', 'Checking SBA eligibility…', 'Modeling loan scenarios for your profile…'],
+    message: "Based on your 2-year revenue history and current debt coverage, you qualify for three programs. The SBA 7(a) is your strongest fit — lowest rate, longest term, and the highest likelihood of approval given your DSCR.",
+    card: `<div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">Funding Options</div>
+        <div class="hd-card-badge" style="background:rgba(30,107,53,0.08);border-color:rgba(30,107,53,0.2);color:#1E6B35;">3 programs available</div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell" style="flex:2">
+          <div class="hd-card-cell-lbl">Program</div>
+          <div class="hd-card-cell-val" style="font-size:12px">SBA 7(a) <span style="font-weight:400;font-size:10px;color:rgba(16,12,8,0.45)">★ Best fit</span></div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Amount</div>
+          <div class="hd-card-cell-val" style="font-size:12px">Up to $350k</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Rate</div>
+          <div class="hd-card-cell-val hd-val-good" style="font-size:12px">7.5%</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell" style="flex:2">
+          <div class="hd-card-cell-lbl">Program</div>
+          <div class="hd-card-cell-val" style="font-size:12px;font-weight:400">SBA Microloan</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Amount</div>
+          <div class="hd-card-cell-val" style="font-size:12px;font-weight:400">Up to $50k</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Rate</div>
+          <div class="hd-card-cell-val" style="font-size:12px;font-weight:400">8–13%</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell" style="flex:2">
+          <div class="hd-card-cell-lbl">Program</div>
+          <div class="hd-card-cell-val" style="font-size:12px;font-weight:400">Revenue-based</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Amount</div>
+          <div class="hd-card-cell-val" style="font-size:12px;font-weight:400">Up to $80k</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Rate</div>
+          <div class="hd-card-cell-val hd-val-warn" style="font-size:12px">14–22%</div>
+        </div>
+      </div>
+    </div>`,
+    replies: ['Start SBA application →', 'What does DSCR mean for me?', 'Compare all three options'],
+  },
+  growth: {
+    prompt: 'Help me get more customers.',
+    status: ['Analyzing your customer history…', 'Identifying high-value opportunities…', 'Building your 30-day growth playbook…'],
+    message: "I looked at your pipeline, past clients, and the local market. Here's a sequenced 30-day plan — it front-loads the fastest wins and builds into compounding channels. Start with the win-back email; it takes 20 minutes and has a $4,200 upside.",
+    card: `<div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">30-Day Growth Playbook</div>
+        <div class="hd-card-badge">$4,200+ upside</div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Week 1</div>
+          <div class="hd-card-cell-val" style="font-size:12px">Win-back email</div>
+          <div class="hd-card-cell-sub">3 dormant clients → $4,200 est.</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Effort</div>
+          <div class="hd-card-cell-val hd-val-good" style="font-size:12px">20 min</div>
+          <div class="hd-card-cell-sub">Fido drafts it for you</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Week 2</div>
+          <div class="hd-card-cell-val" style="font-size:12px">Referral program</div>
+          <div class="hd-card-cell-sub">$25 credit per referral</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Effort</div>
+          <div class="hd-card-cell-val hd-val-good" style="font-size:12px">1 hour</div>
+          <div class="hd-card-cell-sub">Setup + 1 email blast</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Week 3–4</div>
+          <div class="hd-card-cell-val" style="font-size:12px">Local SEO + GMB</div>
+          <div class="hd-card-cell-sub">Compounding organic reach</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Effort</div>
+          <div class="hd-card-cell-val" style="font-size:12px">2 hours</div>
+          <div class="hd-card-cell-sub">Fido handles content</div>
+        </div>
+      </div>
+    </div>`,
+    replies: ['Draft the win-back email', 'Set up a referral program', 'Show me the full calendar'],
+  },
+  email: {
+    prompt: 'Draft a customer win-back email campaign.',
+    status: ['Identifying dormant high-value clients…', 'Drafting personalized messaging…', 'Structuring the campaign…'],
+    message: "I targeted your 3 dormant clients — they averaged $1,400 in lifetime spend and went quiet 90+ days ago. The email is warm, specific to their history with Summit Grounds, and ends with a low-pressure reintroduction.",
+    card: `<div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">Win-back Campaign</div>
+        <div class="hd-card-badge" style="background:rgba(30,107,53,0.08);border-color:rgba(30,107,53,0.2);color:#1E6B35;">Ready to send</div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Subject line</div>
+          <div class="hd-card-cell-val" style="font-size:11px;font-weight:500">"We miss you — here's something to come back for"</div>
+        </div>
+      </div>
+      <div class="hd-card-row">
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Recipients</div>
+          <div class="hd-card-cell-val" style="font-size:12px">3 dormant clients</div>
+          <div class="hd-card-cell-sub">Avg. $1,400 lifetime value</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Last contact</div>
+          <div class="hd-card-cell-val hd-val-warn" style="font-size:12px">90+ days</div>
+          <div class="hd-card-cell-sub">Prime win-back window</div>
+        </div>
+        <div class="hd-card-cell">
+          <div class="hd-card-cell-lbl">Upside est.</div>
+          <div class="hd-card-cell-val hd-val-good" style="font-size:12px">$4,200</div>
+          <div class="hd-card-cell-sub">At 100% reactivation</div>
+        </div>
+      </div>
+    </div>`,
+    replies: ['Send campaign now', 'Edit the subject line', 'Add more recipients'],
+  },
+};
+
+/* ── Hero card demo state ── */
+let hdActive = false;
+
+function hdReset() {
+  hdActive = false;
+  document.getElementById('hd-empty').style.display = '';
+  document.getElementById('hd-convo').style.display = 'none';
+  document.getElementById('hd-msgs').innerHTML = '';
+  document.getElementById('hd-replies').style.display = 'none';
+  document.getElementById('hd-replies').innerHTML = '';
+  document.getElementById('hd-reset').style.display = 'none';
+  document.getElementById('hd-input-text').textContent = 'Ask Fido anything about your business…';
+}
+
+function hdSleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function hdRun(scenario) {
+  if (hdActive) return;
+  hdActive = true;
+  const s = HD_SCENARIOS[scenario];
+  const body     = document.getElementById('hd-body');
+  const empty    = document.getElementById('hd-empty');
+  const convo    = document.getElementById('hd-convo');
+  const msgs     = document.getElementById('hd-msgs');
+  const replies  = document.getElementById('hd-replies');
+  const inputTxt = document.getElementById('hd-input-text');
+  const resetBtn = document.getElementById('hd-reset');
+
+  empty.style.display = 'none';
+  convo.style.display = 'block';
+
+  // User bubble
+  const userMsg = document.createElement('div');
+  userMsg.className = 'hd-msg-user';
+  userMsg.innerHTML = `<div class="hd-msg-user-bubble">${s.prompt}</div>`;
+  msgs.appendChild(userMsg);
+  inputTxt.textContent = s.prompt;
+  body.scrollTop = body.scrollHeight;
+  await hdSleep(320);
+
+  // Fido row with typing
+  const fidoRow = document.createElement('div');
+  fidoRow.className = 'hd-msg-fido';
+  fidoRow.innerHTML = `<div class="hd-msg-fido-av">F</div><div class="hd-msg-fido-inner"><div class="hd-status" id="hd-status-lbl"><span class="hd-status-dot"></span>${s.status[0]}</div><div class="hd-typing"><div class="hd-dot"></div><div class="hd-dot"></div><div class="hd-dot"></div></div></div>`;
+  msgs.appendChild(fidoRow);
+  body.scrollTop = body.scrollHeight;
+
+  const statusLbl = document.getElementById('hd-status-lbl');
+  for (let i = 1; i < s.status.length; i++) {
+    await hdSleep(880);
+    statusLbl.innerHTML = `<span class="hd-status-dot"></span>${s.status[i]}`;
+  }
+  await hdSleep(700);
+
+  // Reveal response + card
+  const inner = fidoRow.querySelector('.hd-msg-fido-inner');
+  inner.innerHTML = `<div class="hd-msg-fido-bubble">${s.message}</div>${s.card}`;
+  body.scrollTop = body.scrollHeight;
+  await hdSleep(350);
+
+  // Quick replies
+  replies.style.display = 'flex';
+  s.replies.forEach(r => {
+    const btn = document.createElement('button');
+    btn.className = 'hd-reply';
+    btn.textContent = r;
+    btn.onclick = () => {
+      inputTxt.textContent = r;
+      document.querySelectorAll('.hd-reply').forEach(b => b.style.opacity = '0.45');
+      btn.style.opacity = '1';
+      btn.style.background = 'rgba(244,238,226,0.10)';
+      btn.style.borderColor = 'rgba(244,238,226,0.30)';
+      btn.style.color = 'var(--cream)';
+    };
+    replies.appendChild(btn);
+  });
+
+  resetBtn.style.display = 'inline';
+  body.scrollTop = body.scrollHeight;
+}
 
 function handleCTA(e) {
   e.preventDefault();
