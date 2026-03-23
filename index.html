@@ -833,6 +833,156 @@
     .partner-cta:hover { opacity: 0.8; transform: translateY(-1px); }
 
     /* ══════════════════════════════════
+       PRICING
+    ══════════════════════════════════ */
+    .pricing-grid {
+      margin-top: 56px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 780px;
+    }
+
+    .pricing-card {
+      border: 1px solid var(--ink-rule);
+      background: var(--parch);
+      padding: 36px 32px 32px;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.pricing-card--hi {
+      border-color: var(--ink);
+    }
+
+    .pricing-badge {
+      position: absolute; top: -1px; left: 0; right: 0;
+      background: var(--ink);
+      color: var(--parch);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase;
+      text-align: center; padding: 5px 0;
+    }
+
+    .pricing-tier {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-faint); margin-bottom: 16px;
+    }
+
+    .pricing-card--hi .pricing-tier { margin-top: 24px; }
+
+    .pricing-price {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 42px; font-weight: 300; letter-spacing: -0.03em;
+      color: var(--ink); line-height: 1;
+    }
+
+    .pricing-cadence {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--ink-faint);
+      margin-left: 4px;
+    }
+
+    .pricing-tagline {
+      font-size: 13px; color: var(--ink-mid); font-weight: 300;
+      line-height: 1.6; margin-top: 10px; margin-bottom: 28px;
+    }
+
+    .pricing-divider {
+      height: 1px; background: var(--ink-rule); margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 12px;
+      flex: 1;
+    }
+
+    .pricing-feature {
+      font-size: 12px; color: var(--ink); font-weight: 300;
+      line-height: 1.5; padding-left: 18px; position: relative;
+    }
+
+    .pricing-feature::before {
+      content: '✓'; position: absolute; left: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink-mid);
+    }
+
+    .pricing-feature-note {
+      display: block; margin-top: 2px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink-faint);
+    }
+
+    .pricing-feature--dim {
+      opacity: 0.28;
+    }
+
+    .pricing-feature--dim::before { content: '–'; }
+
+    .pricing-cta {
+      margin-top: 28px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 11px 0; width: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em;
+      cursor: pointer; border-radius: 100px;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+
+    .pricing-cta--ghost {
+      background: transparent;
+      color: var(--ink-mid);
+      border: 1px solid var(--ink-rule);
+    }
+
+    .pricing-cta--primary {
+      background: var(--ink);
+      color: var(--parch);
+      border: none;
+    }
+
+    .pricing-cta:hover { opacity: 0.78; transform: translateY(-1px); }
+
+    .pricing-mrr {
+      margin-top: 48px;
+      max-width: 780px;
+      border: 1px solid var(--ink-rule);
+      padding: 20px 28px;
+      display: flex; align-items: center; gap: 24px;
+    }
+
+    .pricing-mrr-math {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 22px; font-weight: 300; color: var(--ink);
+      flex-shrink: 0; white-space: nowrap;
+    }
+
+    .pricing-mrr-rule {
+      width: 1px; height: 36px; background: var(--ink-rule); flex-shrink: 0;
+    }
+
+    .pricing-mrr-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink); margin-bottom: 4px;
+    }
+
+    .pricing-mrr-note {
+      font-size: 12px; font-weight: 300; color: var(--ink-mid); line-height: 1.6;
+    }
+
+    .pricing-footnote {
+      margin-top: 28px; max-width: 500px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--ink-faint); line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════
        CTA  — slightly deeper parch
     ══════════════════════════════════ */
     .cta-section { background: var(--parch-alt); border-top: 1px solid var(--ink-rule); }
@@ -1682,6 +1832,7 @@
     <li><a href="#manifesto">Manifesto</a></li>
     <li><a href="#partners">Partners</a></li>
     <li><a href="#vision">Vision</a></li>
+    <li><a href="#pricing">Pricing</a></li>
   </ul>
   <a href="#waitlist" class="nav-cta">Get Early Access</a>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
@@ -1695,6 +1846,7 @@
     <li><a href="#manifesto">Manifesto</a></li>
     <li><a href="#partners">Partners</a></li>
     <li><a href="#vision">Vision</a></li>
+    <li><a href="#pricing">Pricing</a></li>
   </ul>
   <a href="#waitlist" class="nav-mobile-cta">Get Early Access</a>
 </div>
@@ -1998,6 +2150,75 @@
     <p class="section-body">The AI operating system of the American small business. The single trusted entity that knows more about how a business runs than the owner themselves, and works every day to make it better.</p>
   </section>
 
+</div>
+
+
+<!-- PRICING -->
+<div class="page">
+  <section class="section reveal" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-headline">Simple, predictable pricing.</h2>
+    <p class="section-body">Start free. Upgrade when Fido becomes indispensable. No surprise credit resets. No wondering if you'll be billed this month.</p>
+
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Free</div>
+        <div>
+          <span class="pricing-price">$0</span>
+          <span class="pricing-cadence">forever</span>
+        </div>
+        <p class="pricing-tagline">Start for free. No card required.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li class="pricing-feature">Funding flow<span class="pricing-feature-note">Up to 10 messages, then a simple form</span></li>
+          <li class="pricing-feature">25 Fido messages / month</li>
+          <li class="pricing-feature">Plaid + QuickBooks sync<span class="pricing-feature-note">One sync per week</span></li>
+          <li class="pricing-feature">Delayed dashboards<span class="pricing-feature-note">~48 hr data lag</span></li>
+          <li class="pricing-feature">Basic notifications<span class="pricing-feature-note">Limited SMS & alerts</span></li>
+          <li class="pricing-feature">Top-of-funnel always free</li>
+          <li class="pricing-feature pricing-feature--dim">Daily syncs</li>
+          <li class="pricing-feature pricing-feature--dim">Real-time dashboards</li>
+          <li class="pricing-feature pricing-feature--dim">Unlimited notifications</li>
+        </ul>
+        <a href="#waitlist" class="pricing-cta pricing-cta--ghost">Get Started →</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card pricing-card--hi">
+        <div class="pricing-badge">Recommended</div>
+        <div class="pricing-tier">Premium</div>
+        <div>
+          <span class="pricing-price">$25</span>
+          <span class="pricing-cadence">/ month</span>
+        </div>
+        <p class="pricing-tagline">Fido as a real day-to-day partner.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li class="pricing-feature">Funding flow<span class="pricing-feature-note">Same cap, priority processing</span></li>
+          <li class="pricing-feature">150 Fido messages / month</li>
+          <li class="pricing-feature">Usage billing above 150<span class="pricing-feature-note">$0.10 per message</span></li>
+          <li class="pricing-feature">Plaid + QuickBooks sync<span class="pricing-feature-note">Daily syncs, always up to date</span></li>
+          <li class="pricing-feature">Real-time dashboards<span class="pricing-feature-note">Fido sees what you see</span></li>
+          <li class="pricing-feature">Unlimited notifications<span class="pricing-feature-note">SMS, email & in-app</span></li>
+        </ul>
+        <a href="#waitlist" class="pricing-cta pricing-cta--primary">Upgrade to Premium →</a>
+      </div>
+
+    </div>
+
+    <div class="pricing-mrr">
+      <div class="pricing-mrr-math">100 × $25</div>
+      <div class="pricing-mrr-rule"></div>
+      <div>
+        <div class="pricing-mrr-label">$2,500 predictable MRR</div>
+        <div class="pricing-mrr-note">100 premium users means exactly $2,500 in subscription revenue every month — no guessing if they'll top up credits.</div>
+      </div>
+    </div>
+
+    <p class="pricing-footnote">Pricing is in early access. Numbers will evolve as we learn with you.<br>Founding users lock in their tier for 12 months.</p>
+  </section>
 </div>
 
 
