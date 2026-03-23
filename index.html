@@ -593,6 +593,21 @@
       text-transform: uppercase; color: var(--ink-faint); margin-top: 10px;
     }
 
+    .stats-source {
+      width: 100%; text-align: center; margin-top: 24px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px; letter-spacing: 0.12em; color: var(--ink-faint);
+      opacity: 0.55;
+    }
+
+    .stats-source a {
+      color: inherit; text-decoration: underline;
+      text-decoration-color: rgba(26,20,16,0.2);
+      text-underline-offset: 2px;
+    }
+
+    .stats-source a:hover { opacity: 0.85; }
+
     /* ══════════════════════════════════
        PAGE / SECTION BASE  — light parchment
     ══════════════════════════════════ */
@@ -1825,7 +1840,7 @@
 <nav>
   <a href="#" class="nav-logo">
     <span class="nav-logo-name">Fido Financial.</span>
-    <span class="nav-logo-sub">Stop Working For The Man</span>
+    <span class="nav-logo-sub">Stop Working For The Man&#8482;</span>
   </a>
   <ul class="nav-links">
     <li><a href="#product">Product</a></li>
@@ -1867,7 +1882,7 @@
     </h1>
 
     <p class="hero-sub">
-      Fido Financial handles the painful daily grind, so you can spend more time doing what you love. Stop Working For the Man (SWFTM™).
+      Fido Financial handles the painful daily grind, so you can spend more time doing what you love. Stop Working For The Man&#8482; (SWFTM&#8482;).
     </p>
 
     <div class="hero-ctas">
@@ -1936,6 +1951,7 @@
   <div class="stat-item"><div class="stat-value">$500B</div><div class="stat-label">Serviceable market</div></div>
   <div class="stat-item"><div class="stat-value">62M</div><div class="stat-label">Americans employed by SMBs</div></div>
   <div class="stat-item"><div class="stat-value">46%</div><div class="stat-label">Of private-sector GDP</div></div>
+  <div class="stats-source">Sources: <a href="https://www.sba.gov/sites/default/files/advocacy/2023-Small-Business-Economic-Profile-US.pdf" target="_blank" rel="noopener">SBA Office of Advocacy, 2023 Small Business Economic Profile</a> &nbsp;·&nbsp; <a href="https://www.bls.gov/bdm/smallbusiness/smallbusiness.htm" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics</a></div>
 </div>
 
 
@@ -1944,14 +1960,14 @@
   <!-- PROBLEM -->
   <section class="section reveal" id="problem">
     <div class="section-label">The Problem</div>
-    <h2 class="section-headline">Running a small business is still impossibly hard</h2>
+    <h2 class="section-headline">Running a small business is still incredibly hard</h2>
     <p class="section-body">Tens of millions of people want to work for themselves. Only a fraction succeed, held back not by ambition, but by the complexity of starting, funding, and growing a business without a team behind them.</p>
     <div class="problem-grid">
       <div class="problem-cell"><div class="problem-num">01</div><div class="problem-title">Getting Funded</div><div class="problem-text">Predatory rates, opaque processes, and application nightmares keep small businesses from the capital they need to grow.</div></div>
-      <div class="problem-cell"><div class="problem-num">02</div><div class="problem-title">Staying Compliant</div><div class="problem-text">LLC filings, annual reports, registered agent requirements: a constant compliance burden most owners aren't equipped to navigate alone.</div></div>
-      <div class="problem-cell"><div class="problem-num">03</div><div class="problem-title">Operating the Business</div><div class="problem-text">Getting customers, managing cash flow, paying vendors, handling invoices. Fido automates the work owners dislike most.</div></div>
+      <div class="problem-cell"><div class="problem-num">02</div><div class="problem-title">Staying Compliant</div><div class="problem-text">LLC filings, annual reports, registered agent requirements: a constant compliance burden owners aren't equipped to navigate alone.</div></div>
+      <div class="problem-cell"><div class="problem-num">03</div><div class="problem-title">Operating the Business</div><div class="problem-text">Getting customers, recruiting talent, managing cash flow, paying vendors, handling invoices. Fido automates the work owners dislike most, so you can focus on your passion, and we can focus on growing your business.</div></div>
     </div>
-    <div class="pull-quote">We are not building software that helps small businesses manage their problems. We are building an agent that eliminates them.</div>
+    <div class="pull-quote">"We are not building software that helps small businesses manage their problems. We are building an AI agent that eliminates them."</div>
   </section>
 
   <!-- PRODUCT -->
@@ -2010,7 +2026,7 @@
       <aside class="demo-sidebar">
         <div class="demo-sb-logo">
           <div class="demo-sb-logo-name">Fido Financial.</div>
-          <div class="demo-sb-logo-sub">Stop Working For The Man</div>
+          <div class="demo-sb-logo-sub">Stop Working For The Man&#8482;</div>
         </div>
         <div class="demo-sb-nav">
           <div class="demo-sb-item active">
@@ -2113,8 +2129,8 @@
 <section class="manifesto-section" id="manifesto">
   <div class="manifesto-inner">
     <div class="manifesto-eyebrow">The Fido Manifesto</div>
-    <div class="manifesto-swftm">SWFTM.</div>
-    <div class="manifesto-expand">Stop Working For The Man</div>
+    <div class="manifesto-swftm">SWFTM&#8482;.</div>
+    <div class="manifesto-expand">Stop Working For The Man&#8482;</div>
     <div class="manifesto-line">Tens of millions of people want to work for themselves.<br><strong>Only a fraction succeed.</strong></div>
     <div class="manifesto-line">Of the <strong>33 million small businesses</strong> in the United States, too many fail. And even more people <em>never get started</em>, held back by the complexity of forming an entity, finding capital, acquiring customers, and recruiting talent. Not for lack of ambition. For lack of support.</div>
     <div class="manifesto-line">Artificial intelligence holds tremendous promise. It also prompts a real fear: that small businesses could be rendered irrelevant, replaced by AI agents that perform <strong>better, faster, and more cheaply than human labor.</strong></div>
@@ -2169,55 +2185,42 @@
           <span class="pricing-price">$0</span>
           <span class="pricing-cadence">forever</span>
         </div>
-        <p class="pricing-tagline">Start for free. No card required.</p>
+        <p class="pricing-tagline">Everything you need to get started — no credit card, no commitment.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li class="pricing-feature">Funding flow<span class="pricing-feature-note">Up to 10 messages, then a simple form</span></li>
-          <li class="pricing-feature">25 Fido messages / month</li>
-          <li class="pricing-feature">Plaid + QuickBooks sync<span class="pricing-feature-note">One sync per week</span></li>
-          <li class="pricing-feature">Delayed dashboards<span class="pricing-feature-note">~48 hr data lag</span></li>
-          <li class="pricing-feature">Basic notifications<span class="pricing-feature-note">Limited SMS & alerts</span></li>
-          <li class="pricing-feature">Top-of-funnel always free</li>
-          <li class="pricing-feature pricing-feature--dim">Daily syncs</li>
-          <li class="pricing-feature pricing-feature--dim">Real-time dashboards</li>
-          <li class="pricing-feature pricing-feature--dim">Unlimited notifications</li>
+          <li class="pricing-feature">Explore Fido's funding flow<span class="pricing-feature-note">Up to 10 messages, then a simple form to submit</span></li>
+          <li class="pricing-feature">25 conversations with Fido per month<span class="pricing-feature-note">Ask questions, get answers, take action</span></li>
+          <li class="pricing-feature">Connect Plaid & QuickBooks<span class="pricing-feature-note">Weekly sync keeps your data fresh</span></li>
+          <li class="pricing-feature">Business health dashboard<span class="pricing-feature-note">Updated every 48 hrs</span></li>
+          <li class="pricing-feature">Basic alerts & notifications<span class="pricing-feature-note">Key events delivered to your inbox</span></li>
         </ul>
-        <a href="#waitlist" class="pricing-cta pricing-cta--ghost">Get Started →</a>
+        <a href="#waitlist" class="pricing-cta pricing-cta--ghost">Start for Free →</a>
       </div>
 
       <!-- Premium -->
       <div class="pricing-card pricing-card--hi">
-        <div class="pricing-badge">Recommended</div>
+        <div class="pricing-badge">Most Popular</div>
         <div class="pricing-tier">Premium</div>
         <div>
           <span class="pricing-price">$25</span>
           <span class="pricing-cadence">/ month</span>
         </div>
-        <p class="pricing-tagline">Fido as a real day-to-day partner.</p>
+        <p class="pricing-tagline">Everything in Free, plus Fido becomes your active day-to-day business partner.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li class="pricing-feature">Funding flow<span class="pricing-feature-note">Same cap, priority processing</span></li>
-          <li class="pricing-feature">150 Fido messages / month</li>
-          <li class="pricing-feature">Usage billing above 150<span class="pricing-feature-note">$0.10 per message</span></li>
-          <li class="pricing-feature">Plaid + QuickBooks sync<span class="pricing-feature-note">Daily syncs, always up to date</span></li>
-          <li class="pricing-feature">Real-time dashboards<span class="pricing-feature-note">Fido sees what you see</span></li>
-          <li class="pricing-feature">Unlimited notifications<span class="pricing-feature-note">SMS, email & in-app</span></li>
+          <li class="pricing-feature">Everything in Free</li>
+          <li class="pricing-feature">150 conversations with Fido per month<span class="pricing-feature-note">Plus $0.10 per message if you go over</span></li>
+          <li class="pricing-feature">Daily Plaid & QuickBooks sync<span class="pricing-feature-note">Your numbers are always current</span></li>
+          <li class="pricing-feature">Real-time business dashboard<span class="pricing-feature-note">Fido always sees what you see</span></li>
+          <li class="pricing-feature">Unlimited alerts & notifications<span class="pricing-feature-note">SMS, email & in-app — never miss a beat</span></li>
+          <li class="pricing-feature">Priority funding processing<span class="pricing-feature-note">Move faster when capital matters most</span></li>
         </ul>
-        <a href="#waitlist" class="pricing-cta pricing-cta--primary">Upgrade to Premium →</a>
+        <a href="#waitlist" class="pricing-cta pricing-cta--primary">Get Early Access →</a>
       </div>
 
     </div>
 
-    <div class="pricing-mrr">
-      <div class="pricing-mrr-math">100 × $25</div>
-      <div class="pricing-mrr-rule"></div>
-      <div>
-        <div class="pricing-mrr-label">$2,500 predictable MRR</div>
-        <div class="pricing-mrr-note">100 premium users means exactly $2,500 in subscription revenue every month — no guessing if they'll top up credits.</div>
-      </div>
-    </div>
-
-    <p class="pricing-footnote">Pricing is in early access. Numbers will evolve as we learn with you.<br>Founding users lock in their tier for 12 months.</p>
+    <p class="pricing-footnote">Pricing is in early access — numbers will evolve as we learn alongside you.<br>Founding users lock in their rate for 12 months.</p>
   </section>
 </div>
 
@@ -2227,7 +2230,7 @@
   <div class="cta-inner">
     <div class="cta-left">
       <div class="cta-eyebrow">Early Access</div>
-      <h2 class="cta-headline">Stop working for the man. Start with Fido.</h2>
+      <h2 class="cta-headline">Stop Working For The Man&#8482;. Start with Fido.</h2>
       <ul class="cta-perks">
         <li class="cta-perk">Funding applications handled end-to-end</li>
         <li class="cta-perk">Incorporation and compliance on autopilot</li>
@@ -2255,7 +2258,7 @@
   <div class="footer-inner">
     <div class="footer-logo">
       <div class="footer-name-display">Fido Financial.</div>
-      <div class="footer-name-sub">Stop Working For The Man</div>
+      <div class="footer-name-sub">Stop Working For The Man&#8482;</div>
     </div>
     <ul class="footer-links">
       <li><a href="#product">Product</a></li>
