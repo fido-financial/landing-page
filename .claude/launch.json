@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fido-landing",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3400"],
+      "port": 3400
+    },
+    {
+      "name": "fido-sandbox",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/maxruskowski/Desktop/fido-sandbox"],
+      "port": 5173
+    }
+  ]
+}
